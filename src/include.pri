@@ -5,7 +5,8 @@ SOURCES += \
     src/opengl/nkgltext.cpp \
     src/opengl/opengl.cpp \
     src/models/nkhex2.cpp \
-    src/sdl/nktimer.cpp
+    src/sdl/nktimer.cpp \
+    src/models/nkselecthexmodel.cpp
 
 HEADERS += \
     src/sdl/nksdl.h \
@@ -23,5 +24,6 @@ HEADERS += \
     src/bandit/options.h \
     src/bandit/runner.h \
     src/bandit/test_run_error.h \
-    src/sdl/nktimer.h
+    src/sdl/nktimer.h \
+    src/models/nkselecthexmodel.h
 

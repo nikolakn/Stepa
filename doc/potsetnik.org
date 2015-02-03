@@ -16,6 +16,8 @@ emacs file - org mode
 - [ ] Abstract class for camera
 - [ ] camera for map
 - [ ] camera for room
+- [ ] log console for fullscrean
+- [ ] fps display option
 - [ ] add hexselect model
 - [X] Picking technique for hex selection 
 - [X] hex instanced rendering 
