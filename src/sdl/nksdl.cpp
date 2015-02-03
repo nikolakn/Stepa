@@ -207,6 +207,12 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
         case SDLK_DOWN:
             GL->moveDown();
             break;
+        case SDLK_1:
+            GL->move1();
+            break;
+        case SDLK_2:
+            GL->move2();
+            break;
         default:
             break;
         }

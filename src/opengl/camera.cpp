@@ -71,7 +71,7 @@ void NkCamera::translateY(float amount)
 
 void NkCamera::translateZ(float amount)
 {
-    modelView= glm::translate(modelView,glm::vec3(0, amount, 0));
+    modelView= glm::translate(modelView,glm::vec3(0, 0, amount));
 }
 
 void NkCamera::setProjection3D(float fFOV, float fAspectRatio, float fNear, float fFar)

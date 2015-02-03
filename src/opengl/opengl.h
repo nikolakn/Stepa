@@ -36,6 +36,7 @@
 #include "opengl/camera.h"
 #include "models/nkhex2.h"
 #include "opengl/nkgltext.h"
+#include "models/nkselecthexmodel.h"
 
 /**
  * @brief The NkOpengl class
@@ -80,11 +81,13 @@ public:
     void moveUp();
     void moveDown();
 
+    void move1();
+    void move2();
 private:
     NkHex2 hexMap;      /**< map made of hex poligons */
     NkCamera kamera;    /**< main camera */
     NkGlText nkText;    /**< display text on screen */
-
+    NkSelectHexModel selHex;  /**< draw selection mark */
     int windowWidth;
     int windowHeight;
     bool isSelected;

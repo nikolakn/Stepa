@@ -22,6 +22,10 @@
 #include "include/framework.h"
 #include "nkmodel.h"
 
+/**
+ * @brief The NkSelectHexModel class
+ * draw selection mark
+ */
 class NkSelectHexModel : public NkModel
 {
 public:
@@ -33,7 +37,7 @@ public:
     void loadShaders();
 private:
 
-    GLuint vao;
+    GLuint selvao;
     GLuint position_vbo;
     GLint mvp_mat_loc;
     GLint view_mat_loc;

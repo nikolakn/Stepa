@@ -38,6 +38,7 @@ bool  NkOpengl::initGL(int w, int h)
 
     nkText.Init(w,h);
     hexMap.init();
+    selHex.init();
     //set camera to init possition
     kamera.translateY(9);
     return true;
@@ -49,6 +50,7 @@ void NkOpengl::render(){
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
+    selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     nkText.renderClickMessage(clickMsg);
 
 }
@@ -106,4 +108,14 @@ void NkOpengl::moveDown()
     kamera.translateY(-0.5);
 }
 
+void NkOpengl::move1()
+{
+    //kamera.rotatex(-0.05f);
+    kamera.translateZ(0.5);
+}
 
+void NkOpengl::move2()
+{
+    //kamera.rotatex(-0.05f);
+    kamera.translateZ(-0.5);
+}
