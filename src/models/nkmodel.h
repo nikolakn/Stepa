@@ -30,7 +30,8 @@ class NkModel
     virtual	void init() = 0;
     virtual void render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView) = 0;
     virtual	void releaseScene() = 0;
-
+    virtual GLuint createHex() = 0;
+    virtual void loadShaders() = 0;
  protected:
     GLuint program;
     framework frm;

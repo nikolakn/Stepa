@@ -43,7 +43,7 @@ void NkHex2::init()
 
     program = 0;
     programsel = 0;
-    this->LoadShaders();
+    this->loadShaders();
     //program1
     gbuffer_instanced_mvp_mat_loc = glGetUniformLocation( program, "mvp" );
     gbuffer_instanced_normal_mat_loc = glGetUniformLocation( program, "normal_mat" );
@@ -185,7 +185,7 @@ GLuint NkHex2::createHex()
 * bind shaders with constants in compile time
 * to avoid duplicate it through code.
 */
-void NkHex2::LoadShaders(){
+void NkHex2::loadShaders(){
     //shaders
     std::string n = std::to_string(HEX_LINE_NUM);
     std::string sidex = std::to_string(HEX_WIDTH);

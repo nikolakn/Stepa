@@ -26,6 +26,24 @@ class NkSelectHexModel : public NkModel
 {
 public:
     NkSelectHexModel();
+    void init();
+    void render(mat4 *ProjectionMatrix, mat4 *mModelView);
+    void releaseScene();
+    GLuint createHex();
+    void loadShaders();
+private:
+
+    GLuint vao;
+    GLuint position_vbo;
+    GLint mvp_mat_loc;
+    GLint view_mat_loc;
+    GLint gbuffer_instanced_pos;
+
+    vector<vec4> positions;
+    GLuint tex;
+    GLuint programsel;
+    GLuint index_vbo;
+
 };
 
 #endif // NKSELECTHEXMODEL_H

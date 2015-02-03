@@ -26,7 +26,8 @@ OTHER_FILES += \
     doc/potsetnik.org \
     data/shaders/shaderhex2.frag \
     data/shaders/shaderhex2.vert \
-    data/textures/hextex.png
+    data/textures/hextex.png \
+    data/textures/hexselect.png
 
 
 

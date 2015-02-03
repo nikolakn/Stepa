@@ -75,7 +75,7 @@ public:
      * @brief LoadShaders
      * load shaders from string with constants in compile time
      */
-    void LoadShaders();
+    void loadShaders();
 
 private:
     const float  HEX_WIDTH=0.2;  	/**<width of one hex */
