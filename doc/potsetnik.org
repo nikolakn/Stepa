@@ -1,0 +1,53 @@
+emacs file - org mode
+
+
+** Stepa [0/3] 
+*** TODO [5/16] [31%]
+- [ ] draw texture on hex 
+  (how meny hex texture can be draw without frame drop?)
+  this must be answered before continue.
+  in case of frame drop we need to low hex number and use different selection technique. 
+- [ ] implement borders draw on map
+- [ ] add gun model on desk
+- [ ] add compas model on map
+- [ ] add map textures
+- [ ] implement command pattern for user input in NkSdl
+- [ ] add model to represent desk below map
+- [ ] Abstract class for camera
+- [ ] camera for map
+- [ ] camera for room
+- [ ] add hexselect model
+- [X] Picking technique for hex selection 
+- [X] hex instanced rendering 
+- [X] add hex map 
+- [X] test shader loader on linux
+- [X] implement class to render font text on screen
+
+*** TODO Relase [0/2]
+- [ ] make launcher program that will strat first time
+  user launch game and ask for screen resolution, 
+  fullscreen or windowed mode and other settings.
+- [ ] icon and logo for game
+
+*** TODO Ideas [0/6]
+- [ ] make OpenGL Hex map engine that can be used in
+  multiple games with different texture and models.
+
+- [ ] make room that look like bunker and the map will be on desk.
+  The room will occasionally shake because bombing.
+
+- [ ] make it possible to load different rooms.
+
+- [ ] make WWII turn based game.
+  the game will simulate: war, economy, politics
+  in World War 2 in europe 
+  
+- [ ] make great war (WWI) simulation game
+
+- [ ] make modern time war simulation game
+
+- [ ] try to implement fog of war in shader
+
+
+
+ 
