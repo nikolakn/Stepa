@@ -30,13 +30,31 @@ class NkSelectHexModel : public NkModel
 {
 public:
     NkSelectHexModel();
+    /**
+     * @brief init load and bind data
+     */
     void init();
     void render(mat4 *ProjectionMatrix, mat4 *mModelView);
     void releaseScene();
-    GLuint createHex();
-    void loadShaders();
-private:
 
+    /**
+     * @brief createHex bind buffers
+     * @return vao
+     */
+    GLuint createHex();
+
+    /**
+     * @brief LoadShaders
+     * load shaders from string
+     */
+    void loadShaders();
+    /**
+     * @brief setXY
+     * set selected hex
+     */
+    void setXY(int xS, int yS);
+private:
+    float x,y;        /**<coordinates of selected hex */
     GLuint selvao;
     GLuint position_vbo;
     GLint mvp_mat_loc;

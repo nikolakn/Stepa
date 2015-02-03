@@ -85,7 +85,7 @@ private:
      *for selection to work nuber of hex<=65536
      *for more hex: shader program programsel need to be changed to include blue color too
      **/
-    const int HEX_SIZE = 50000;
+    const int HEX_SIZE = 40000;
     const int HEX_LINE_NUM = 200;   /**<number of hex in one line*/
 
     GLuint box;

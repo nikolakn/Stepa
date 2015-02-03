@@ -67,8 +67,8 @@ void NkOpengl::leftClick(int x, int y){
     glReadPixels(x, y, 1, 1,  GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
    // System.out.println(buffer.get(0));
-    int xS= pixels[0];
-    int yS =pixels[1];
+    int xS= pixels[1];
+    int yS =pixels[0];
     int sS =pixels[2];
 
     if (xS == 0 && yS == 0 && sS == 0) {
@@ -78,10 +78,12 @@ void NkOpengl::leftClick(int x, int y){
         //selCur.setXYS(xS, yS, sS);
         isSelected = true;
     }
+    selHex.setXY(xS,yS);
     std::ostringstream stream;
     stream << "sel hex:, x=" << xS <<" y=" << yS;
 
     clickMsg  = stream.str();
+
     //cout << "click  x:" << xS << " y:"<< yS << " "  <<endl;
 }
 
@@ -99,23 +101,23 @@ void NkOpengl::moveRight()
 void NkOpengl::moveUp()
 {
     //kamera.rotatex(0.05f);
-    kamera.translateY(0.5);
+    kamera.translateZ(0.5);
 }
 
 void NkOpengl::moveDown()
 {
     //kamera.rotatex(-0.05f);
-    kamera.translateY(-0.5);
+    kamera.translateZ(-0.5);
 }
 
 void NkOpengl::move1()
 {
     //kamera.rotatex(-0.05f);
-    kamera.translateZ(0.5);
+    kamera.translateY(0.5);
 }
 
 void NkOpengl::move2()
 {
     //kamera.rotatex(-0.05f);
-    kamera.translateZ(-0.5);
+    kamera.translateY(-0.5);
 }

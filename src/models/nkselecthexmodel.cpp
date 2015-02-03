@@ -8,7 +8,7 @@ NkSelectHexModel::NkSelectHexModel()
 void NkSelectHexModel::init()
 {
     FreeImage_Initialise(true);
-
+    setXY(0,0);
     selvao = createHex();
     glBindVertexArray( selvao );
 
@@ -27,7 +27,13 @@ void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
     glUseProgram(program);
     //instanced rendering
     glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
-    glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
+    //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
+    glm::mat4 mCurrent;
+    mCurrent = glm::translate(*mModelView, glm::vec3(x, 0.01f, y));
+    //mCurrent = glm::scale(mCurrent, glm::vec3(2.0, 2.0, 2.0));
+    //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
+
     glBindVertexArray( selvao );
 
     //glActiveTexture(GL_TEXTURE0);
@@ -99,7 +105,17 @@ GLuint NkSelectHexModel::createHex()
 
     return vao;
 }
-
+void NkSelectHexModel::setXY(int xS, int yS) {
+    // TODO Auto-generated method stub
+    if (yS % 2 != 0 ){
+        x = 0.2f*xS;
+        y = 0.18f*yS;
+    }
+    else{
+        x = 0.2f*xS+0.1f;
+        y = 0.18f*yS;
+    }
+}
 void NkSelectHexModel::loadShaders()
 {
     //shaders
