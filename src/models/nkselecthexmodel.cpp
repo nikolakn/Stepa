@@ -25,11 +25,13 @@ void NkSelectHexModel::init()
 void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
 {
     glUseProgram(program);
+    glEnable( GL_POLYGON_OFFSET_FILL );
+    glPolygonOffset( -1, -1 );
     //instanced rendering
     glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
     //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
     glm::mat4 mCurrent;
-    mCurrent = glm::translate(*mModelView, glm::vec3(x, 0.01f, y));
+    mCurrent = glm::translate(*mModelView, glm::vec3(x, 0, y));
     //mCurrent = glm::scale(mCurrent, glm::vec3(2.0, 2.0, 2.0));
     //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
     glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
@@ -44,7 +46,7 @@ void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
     // Draw the vertices
     glDrawElements(GL_TRIANGLE_FAN, 6 ,GL_UNSIGNED_INT, 0);
-
+    glDisable( GL_POLYGON_OFFSET_FILL );
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
