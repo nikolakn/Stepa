@@ -2,7 +2,7 @@
 Hex game 
 
 >=OpenGL 3.3 
-dependences for build: SDL2 , GLEW , FreeImage, FreeType, qmake
+dependences for build: SDL2 , GLEW , Assimp , FreeImage, FreeType, qmake
 
 build:
 qmake;
@@ -19,6 +19,8 @@ http://stackoverflow.com/questions/6005076/building-glew-on-windows-with-mingw
 http://www.freetype.org/
 
 http://freeimage.sourceforge.net/download.html
+
+http://assimp.sourceforge.net/
 
 tested:
 
