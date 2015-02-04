@@ -93,7 +93,7 @@ int NkGlText::Init(int w, int h)
     /* Create texture atlasses for several font sizes */
     //a48 = new atlas(face, 48, uniform_tex);
     //a24 = new atlas(face, 24, uniform_tex);
-    a12 = new atlas(face, 16, uniform_tex);
+    a12 = new atlas(face, 14, uniform_tex);
     glUseProgram(0);
 
 

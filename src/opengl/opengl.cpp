@@ -65,9 +65,11 @@ void NkOpengl::render(){
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     bleckR.render(15.0,20.0,200.0,100.0);
-    nkText.renderText(clickMsg, 35, 80, vec4(0.8,0.8,0.8,1));
+    nkText.renderText(clickMsg, 35, 60, vec4(0.8,0.8,0.8,1));
     if(showFpsGl)
-        nkText.renderText(fpsMsg, 35, 45, vec4(0.8,0.8,0.8,1));
+        nkText.renderText(fpsMsg, 35, 40, vec4(0.8,0.8,0.8,1));
+    nkText.renderText("F11 toggle FS", 35, 80, vec4(1,0.4,0.1,1));
+    nkText.renderText("arraw kays to move", 35, 100, vec4(1,0.4,0.1,1));
 
 }
 //Picking technique

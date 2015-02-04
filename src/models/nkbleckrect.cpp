@@ -136,7 +136,7 @@ void NkBleckRect::loadShaders()
         "out vec4 color;\n"
         "void main()\n"
         "{\n"
-        "   color = vec4(0.0,0.0,0.0,0.6);\n"
+        "   color = vec4(0.0,0.0,0.0,0.7);\n"
         "}\n"
     };
     frm.load_string_shader(vertexShaderSource, program, GL_VERTEX_SHADER);
