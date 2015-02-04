@@ -98,7 +98,9 @@ private:
     GLint gbuffer_instanced_normal_mat_loc_sel;
     GLint gbuffer_instanced_view_sel;
     GLint gbuffer_instanced_pos_sel;
-
+    GLuint vertex_vbo;
+    GLuint normal_vbo;
+    GLuint tex_vbo=0;
     vector<vec4> positions;
     GLuint tex;
     GLuint index_vbo;

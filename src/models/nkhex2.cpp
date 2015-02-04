@@ -83,8 +83,15 @@ void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 }
 void NkHex2::releaseScene()
 {
+    glUseProgram(0);
     glDeleteProgram(program);
     glDeleteProgram(programsel);
+    glDeleteTextures(1, &tex);
+    glDeleteBuffers(1,&normal_vbo);
+    glDeleteBuffers(1,&vertex_vbo);
+    glDeleteBuffers(1,&tex_vbo);
+    glDeleteBuffers(1,&index_vbo);
+    glDeleteVertexArrays(1, &box);
 }
 
 GLuint NkHex2::createHex()
@@ -94,7 +101,9 @@ GLuint NkHex2::createHex()
   vector<vec2> texture;
   vector<unsigned int> indices;
   GLuint vao = 0;
-  GLuint vertex_vbo = 0, normal_vbo = 0, tex_vbo=0;
+  vertex_vbo = 0,
+  normal_vbo = 0,
+  tex_vbo=0;
   index_vbo = 0;
   //up
   float hx = HEX_WIDTH/2;

@@ -56,7 +56,13 @@ void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
 
 void NkSelectHexModel::releaseScene()
 {
+    glUseProgram(0);
+    glDeleteTextures(1, &tex);
     glDeleteProgram(program);
+    glDeleteBuffers(1,&vertex_vbo);
+    glDeleteBuffers(1,&tex_vbo);
+    glDeleteBuffers(1,&index_vbo);
+    glDeleteVertexArrays(1, &selvao);
 }
 
 
@@ -66,7 +72,8 @@ GLuint NkSelectHexModel::createHex()
     vector<vec2> texture;
     vector<unsigned int> indices;
     GLuint vao = 0;
-    GLuint vertex_vbo = 0, tex_vbo=0;
+    vertex_vbo = 0;
+    tex_vbo=0;
     index_vbo=0;
     vertices.push_back( vec3( -0.15f, 0, 0.16f ) );
     vertices.push_back( vec3( -0.15f,0, -0.16f ) );

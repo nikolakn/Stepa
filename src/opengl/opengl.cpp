@@ -20,7 +20,9 @@ NkOpengl::NkOpengl()
 
 NkOpengl::~NkOpengl()
 {
-
+    bleckR.releaseScene();
+    hexMap.releaseScene();
+    selHex.releaseScene();
 }
 
 bool  NkOpengl::initGL(int w, int h)
@@ -53,8 +55,7 @@ void NkOpengl::render(){
 
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
-    //nkText.renderClickMessage(clickMsg);
-    bleckR.render(15,20,200,100);
+    bleckR.render(15.0,20.0,200.0,100.0);
     nkText.renderText(clickMsg, 35, 80, vec4(0.8,0.8,0.8,1));
     if(showFpsGl)
         nkText.renderText(fpsMsg, 35, 45, vec4(0.8,0.8,0.8,1));

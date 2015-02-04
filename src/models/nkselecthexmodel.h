@@ -60,7 +60,8 @@ private:
     GLint mvp_mat_loc;
     GLint view_mat_loc;
     GLint gbuffer_instanced_pos;
-
+    GLuint vertex_vbo;
+    GLuint tex_vbo;
     vector<vec4> positions;
     GLuint tex;
     GLuint programsel;

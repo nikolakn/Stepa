@@ -13,10 +13,11 @@ emacs file - org mode
 - [ ] add map textures
 - [ ] implement command pattern for user input in NkSdl
 - [ ] add model to represent desk below map
+- [ ] model loading with lighting
 - [ ] Abstract class for camera
 - [ ] camera for map
 - [ ] camera for room
-- [ ] log console for fullscrean
+- [ ] log and commande console or line  
 - [X] fps display option
 - [X] add hexselect model
 - [X] Picking technique for hex selection 
