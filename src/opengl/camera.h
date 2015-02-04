@@ -32,7 +32,7 @@ public:
     void setlookAt();
 
     void setModelView(const glm::mat4 &mv);
-
+    void init();
     void updateRot();
     void rotate(float amount);
     void rotatex(float amount);

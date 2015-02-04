@@ -23,7 +23,16 @@ NkOpengl::~NkOpengl()
     bleckR.releaseScene();
     hexMap.releaseScene();
     selHex.releaseScene();
+    nkText.releaseScene();
 }
+void  NkOpengl::resize(int w, int h){
+    bleckR.setDuzina(w);
+    bleckR.setVisina(h);
+    nkText.setDuzina(w);
+    nkText.setVisina(h);
+    kamera.setProjection3D(45.0f, (float)w/(float)h , 0.001f, 1000.0f);
+}
+
 
 bool  NkOpengl::initGL(int w, int h)
 {

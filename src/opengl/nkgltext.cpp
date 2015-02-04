@@ -25,18 +25,31 @@ using namespace std;
 */
 NkGlText::NkGlText()
 {
-    face = 0;
+
 }
 
 NkGlText::~NkGlText()
 {
-    if (face != 0)
+    if (face != nullptr)
         delete face;
+    glUseProgram(0);
     glDeleteProgram(program);
+    glDeleteBuffers(1,&vbo);
+    glDeleteVertexArrays(1, &vao);
+    if(fontfilename != nullptr)
+        delete(fontfilename);
+    if(ft != nullptr)
+        delete(ft);
+    if(face != nullptr)
+        delete(face);
+    //delete(a48);
+    //delete(a24);
+    delete(a12);
 }
 
 int NkGlText::Init(int w, int h)
 {
+    face = 0;
     m_duzina=w;
     m_visina=h;
 
@@ -108,6 +121,26 @@ void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
     glEnable(GL_DEPTH_TEST);
 
 }
+int NkGlText::duzina() const
+{
+    return m_duzina;
+}
+
+void NkGlText::setDuzina(int duzina)
+{
+    m_duzina = duzina;
+}
+int NkGlText::visina() const
+{
+    return m_visina;
+}
+
+void NkGlText::setVisina(int visina)
+{
+    m_visina = visina;
+}
+
+
 void NkGlText::renderClickMessage(string msg){
     float sx = 2.0 / m_duzina;
     float sy = 2.0 / m_visina;
@@ -130,6 +163,21 @@ void NkGlText::renderClickMessage(string msg){
     glBindVertexArray( 0 );
     glUseProgram(0);
     glEnable(GL_DEPTH_TEST);
+
+}
+
+void NkGlText::releaseScene()
+{
+    glUseProgram(0);
+    glDeleteProgram(program);
+    glDeleteBuffers(1,&vbo);
+    glDeleteVertexArrays(1, &vao);
+    delete(fontfilename);
+    delete(ft);
+    delete(face);
+    //delete(a48);
+    //delete(a24);
+    delete(a12);
 
 }
 

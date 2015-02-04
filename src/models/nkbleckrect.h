@@ -14,6 +14,13 @@ public:
     GLuint createHex();
     void loadShaders();
     void init(int w, int h);
+
+    int duzina() const;
+    void setDuzina(int duzina);
+
+    int visina() const;
+    void setVisina(int visina);
+
 private:
     GLuint selvao;
     GLint view_mat_loc;

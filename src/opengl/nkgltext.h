@@ -102,7 +102,7 @@ struct atlas {
         memset(pixels, 0, sizeof(*pixels));
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0,  GL_RED, GL_UNSIGNED_BYTE, pixels);
 
-        delete pixels;
+        delete[] pixels;
         /* Clamping to edges is important to prevent artifacts when scaling */
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -156,6 +156,7 @@ struct atlas {
     ~atlas() {
         glDeleteTextures(1, &tex);
     }
+
 };
 /**
  * @brief The NkGlText class
@@ -170,6 +171,7 @@ public:
     int Init(int w, int h);
     void render();
     void renderClickMessage(std::string msg);
+    void releaseScene();
 private:
     void render_text(const char *text, atlas * a, float x, float y, float sx, float sy);
 
@@ -177,6 +179,12 @@ public:
     GLint uniform_tex;
 
     void renderText(std::string msg, int x, int y, glm::vec4 color);
+    int duzina() const;
+    void setDuzina(int duzina);
+
+    int visina() const;
+    void setVisina(int visina);
+
 private:
     GLuint program;
     GLint attribute_coord;

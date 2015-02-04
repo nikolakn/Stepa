@@ -35,6 +35,14 @@ void NkCamera::setModelView(const glm::mat4 &mv)
     modelView = mv;
 }
 
+void NkCamera::init()
+{
+    position = glm::vec3(15,10,10);
+    direction = glm::vec3(15, 0, 0);
+    upRot = glm::vec3(0, 1, 0);
+    setlookAt();
+}
+
 void NkCamera::rotate(float amount)
 {
     modelView = glm::rotate(modelView, amount, glm::vec3(0.0f, 1.0f, 0.0f));

@@ -72,6 +72,7 @@ public:
      * @brief close  Destroy Window
      */
     void close();
+    void windowsEvent(SDL_Event event);
 private:
     /**
      * @brief setDisplayMode create window

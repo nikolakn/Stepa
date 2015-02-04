@@ -155,3 +155,23 @@ void NkBleckRect::init(int w, int h)
     this->loadShaders();
     view_mat_loc = glGetUniformLocation( program, "view" );
 }
+int NkBleckRect::duzina() const
+{
+    return m_duzina;
+}
+
+void NkBleckRect::setDuzina(int duzina)
+{
+    m_duzina = duzina;
+}
+int NkBleckRect::visina() const
+{
+    return m_visina;
+}
+
+void NkBleckRect::setVisina(int visina)
+{
+    m_visina = visina;
+}
+
+
