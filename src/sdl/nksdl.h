@@ -73,6 +73,7 @@ public:
      */
     void close();
     void windowsEvent(SDL_Event event);
+    int SDL_ToggleFS();
 private:
     /**
      * @brief setDisplayMode create window

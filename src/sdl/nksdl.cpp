@@ -89,23 +89,23 @@ void NkSdl::initGlew(){
 void NkSdl::setDisplayMode(){
     if(nkfullScrean){
         SDL_DisplayMode current;
-        for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
+        //for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
 
-            int should_be_zero = SDL_GetCurrentDisplayMode(i, &current);
+            int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 
             if(should_be_zero != 0)
                 // In case of error...
-                SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
+                SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
             else
                 // On success, print the current display mode.
-                SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", i,
+                SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", 0,
                         current.w, current.h, current.refresh_rate);
 
             width = current.w;
             height = current.h;
             gWindow = SDL_CreateWindow( "Stepa",  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                       width, height, SDL_WINDOW_OPENGL  |  SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN );
-        }
+        //}
     }
     else{
         gWindow = SDL_CreateWindow( "Stepa",  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -275,6 +275,9 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
             showFpsGl = !showFpsGl;
             GL->showFps(showFpsGl);
             break;
+        case SDLK_F11:
+            SDL_ToggleFS();
+            break;
 
         default:
             break;
@@ -319,4 +322,37 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
     default:
         break;
     }
+}
+
+int NkSdl::SDL_ToggleFS()
+{
+    Uint32 flags = (SDL_GetWindowFlags(gWindow) ^ SDL_WINDOW_FULLSCREEN_DESKTOP);
+    if (SDL_SetWindowFullscreen(gWindow, flags) < 0) // NOTE: this takes FLAGS as the second param, NOT true/false!
+    {
+        std::cout << "Toggling fullscreen mode failed: " << SDL_GetError() << std::endl;
+        return -1;
+    }
+    SDL_DisplayMode current;
+    int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
+
+    if(should_be_zero != 0)
+        // In case of error...
+        SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
+    else
+        // On success, print the current display mode.
+        SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", 0,
+                current.w, current.h, current.refresh_rate);
+
+    width = current.w;
+    height = current.h;
+
+    if ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
+    {
+        return 1;
+    }
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    GL->resize(width, height);
+    return 0;
 }
