@@ -27,7 +27,8 @@ OTHER_FILES += \
     data/shaders/shaderhex2.frag \
     data/shaders/shaderhex2.vert \
     data/textures/hextex.png \
-    data/textures/hexselect.png
+    data/textures/hexselect.png \
+    data/textures/hexselect2.png
 
 
 

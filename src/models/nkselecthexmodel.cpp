@@ -19,7 +19,7 @@ void NkSelectHexModel::init()
     mvp_mat_loc = glGetUniformLocation( program, "mvp" );
     view_mat_loc = glGetUniformLocation( program, "view" );
 
-    tex = frm.loadTexture("./data/textures/hexselect.png");
+    tex = frm.loadTexture("./data/textures/hexselect2.png");
 }
 
 void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
