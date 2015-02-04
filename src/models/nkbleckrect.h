@@ -9,9 +9,11 @@ public:
     NkBleckRect();
     void init();
     void render(mat4 *ProjectionMatrix, mat4 *mModelView);
+    void render(int x, int y, int w, int h);
     void releaseScene();
     GLuint createHex();
     void loadShaders();
+    void init(int w, int h);
 private:
     float x,y;        /**<coordinates of selected hex */
     GLuint selvao;
@@ -24,6 +26,9 @@ private:
     GLuint tex;
     GLuint programsel;
     GLuint index_vbo;
+
+    int m_duzina;
+    int m_visina;
 };
 
 #endif // NKBLECKRECT_H

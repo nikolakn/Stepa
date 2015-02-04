@@ -40,7 +40,7 @@ bool  NkOpengl::initGL(int w, int h)
     nkText.Init(w,h);
     hexMap.init();
     selHex.init();
-    bleckR.init();
+    bleckR.init(w,h);
     //set camera to init possition
     kamera.translateY(9);
     return true;
@@ -54,7 +54,7 @@ void NkOpengl::render(){
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     //nkText.renderClickMessage(clickMsg);
-    bleckR.render(kamera.getProjectionMat(),kamera.getModelView());
+    bleckR.render(15,20,200,100);
     nkText.renderText(clickMsg, 35, 80, vec4(0.8,0.8,0.8,1));
     if(showFpsGl)
         nkText.renderText(fpsMsg, 35, 45, vec4(0.8,0.8,0.8,1));

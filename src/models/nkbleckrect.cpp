@@ -23,6 +23,15 @@ void NkBleckRect::init()
 
 void NkBleckRect::render(mat4 *, mat4 *)
 {
+    float x = 0;
+    float y = 300;
+    float duzina =800;
+    float visina =200;
+
+    float scalex= duzina/m_duzina;  //400 duzina pravougaonika
+    float scaley= visina/m_visina;
+    float sx =x/m_duzina;
+    float sy = x/m_duzina;
     glUseProgram(program);
     glEnable( GL_POLYGON_OFFSET_FILL );
     glPolygonOffset( 1, 1 );
@@ -30,8 +39,47 @@ void NkBleckRect::render(mat4 *, mat4 *)
     //glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
     //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
     glm::mat4 mCurrent;
-    mCurrent = glm::translate(mCurrent, glm::vec3(-0.77, 0.85, 0));
-    mCurrent = glm::scale(mCurrent, glm::vec3(0.2, 0.1, 0));
+    mCurrent = glm::translate(mCurrent, glm::vec3(-1+scalex+2.0*sx,1-scaley-2.0*sy, 0));
+    mCurrent = glm::scale(mCurrent, glm::vec3(scalex, scaley, 0));
+    //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
+
+    glBindVertexArray( selvao );
+
+    //glActiveTexture(GL_TEXTURE0);
+    //glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
+
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
+    // Draw the vertices
+    glDrawElements(GL_TRIANGLE_FAN, 6 ,GL_UNSIGNED_INT, 0);
+    glDisable( GL_POLYGON_OFFSET_FILL );
+    glBindSampler(0,0);
+    glBindVertexArray( 0 );
+    glUseProgram(0);
+}
+
+void NkBleckRect::render(int xx, int yy, int w, int h)
+{
+    float x = yy;
+    float y = xx;
+    float duzina =w;
+    float visina =h;
+
+    float scalex= duzina/m_duzina;  //400 duzina pravougaonika
+    float scaley= visina/m_visina;
+    float sx =x/m_duzina;
+    float sy = x/m_duzina;
+    glUseProgram(program);
+    glEnable( GL_POLYGON_OFFSET_FILL );
+    glPolygonOffset( 1, 1 );
+    //instanced rendering
+    //glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
+    //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
+    glm::mat4 mCurrent;
+    mCurrent = glm::translate(mCurrent, glm::vec3(-1+scalex+2.0*sx,1-scaley-2.0*sy, 0));
+    mCurrent = glm::scale(mCurrent, glm::vec3(scalex, scaley, 0));
     //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
     glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
 
@@ -101,7 +149,6 @@ void NkBleckRect::loadShaders()
     //std::string sidey = std::to_string(HEX_HEIGHT);
     string vertexShaderSource = {
         "#version 330\n"
-        "uniform mat4 mvp;\n"
         "uniform mat4 view;\n"
         "layout(location=0) in vec4 in_vertex;\n"
         "void main()\n"
@@ -119,4 +166,18 @@ void NkBleckRect::loadShaders()
     };
     frm.load_string_shader(vertexShaderSource, program, GL_VERTEX_SHADER);
     frm.load_string_shader(fragmentShaderSource, program, GL_FRAGMENT_SHADER);
+}
+
+void NkBleckRect::init(int w, int h)
+{
+    m_duzina=w;
+    m_visina=h;
+    FreeImage_Initialise(true);
+    selvao = createHex();
+    glBindVertexArray( selvao );
+
+
+    program = 0;
+    this->loadShaders();
+    view_mat_loc = glGetUniformLocation( program, "view" );
 }
