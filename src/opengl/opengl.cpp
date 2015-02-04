@@ -14,7 +14,7 @@
 
 NkOpengl::NkOpengl()
 {
-    clickMsg="sel hex:";
+    clickMsg="sel hex: x=74 y=49";
     fpsMsg="FPS:";
 }
 

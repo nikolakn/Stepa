@@ -89,7 +89,6 @@ private:
     const int HEX_LINE_NUM = 200;   /**<number of hex in one line*/
 
     GLuint box;
-    GLuint position_vbo;
     GLint gbuffer_instanced_mvp_mat_loc;
     GLint gbuffer_instanced_normal_mat_loc;
     GLint gbuffer_instanced_view;
@@ -102,6 +101,7 @@ private:
 
     vector<vec4> positions;
     GLuint tex;
+    GLuint index_vbo;
     GLuint programsel;
 };
 

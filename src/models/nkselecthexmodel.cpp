@@ -8,7 +8,7 @@ NkSelectHexModel::NkSelectHexModel()
 void NkSelectHexModel::init()
 {
     FreeImage_Initialise(true);
-    setXY(0,0);
+    setXY(74,49);
     selvao = createHex();
     glBindVertexArray( selvao );
 

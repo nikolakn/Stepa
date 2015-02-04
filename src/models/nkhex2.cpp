@@ -24,22 +24,6 @@ void NkHex2::init()
 
     box = createHex();
     glBindVertexArray( box );
-    positions.resize( 1 ); //make some space
-    glGenBuffers( 1, &position_vbo ); //gen vbo
-    glBindBuffer( GL_ARRAY_BUFFER, position_vbo ); //bind vbo
-    //glBufferData( GL_ARRAY_BUFFER, sizeof( vec4 ) * positions.size(), &positions[0][0], GL_STATIC_DRAW );
-    glBufferData( GL_ARRAY_BUFFER, sizeof( vec4 ) * positions.size(), &positions[0][0], GL_STATIC_DRAW );
-    GLuint location = 3;
-    GLint components = 4;
-    GLenum type = GL_FLOAT;
-    GLboolean normalized = GL_FALSE;
-    GLsizei datasize = sizeof( vec4 );
-    char* pointer = 0; //no other components
-    GLuint divisor = 1; //instanced
-
-    glEnableVertexAttribArray( location ); //tell the location
-    glVertexAttribPointer( location, components, type, normalized, datasize, pointer ); //tell other data
-    glVertexAttribDivisor( location, divisor ); //is it instanced?
 
     program = 0;
     programsel = 0;
@@ -54,7 +38,6 @@ void NkHex2::init()
     gbuffer_instanced_view_sel = glGetUniformLocation( programsel, "view" );
 
     tex = frm.loadTexture("./data/textures/hextex.png");
-
 }
 
 void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
@@ -69,7 +52,7 @@ void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     glBindTexture(GL_TEXTURE_2D, tex);
 
     //upload the instance data
-    glBindBuffer( GL_ARRAY_BUFFER, position_vbo ); //bind vbo
+    //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
     glDrawElementsInstanced( GL_TRIANGLE_FAN, 8, GL_UNSIGNED_INT, 0, HEX_SIZE);
@@ -88,7 +71,7 @@ void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     glBindVertexArray( box );
 
     //upload the instance data
-    glBindBuffer( GL_ARRAY_BUFFER, position_vbo ); //bind vbo
+    //glBindBuffer( GL_ARRAY_BUFFER, position_vbo ); //bind vbo
     //you need to upload sizeof( vec4 ) * number_of_cubes bytes, DYNAMIC_DRAW because it is updated per frame
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
@@ -111,8 +94,8 @@ GLuint NkHex2::createHex()
   vector<vec2> texture;
   vector<unsigned int> indices;
   GLuint vao = 0;
-  GLuint vertex_vbo = 0, normal_vbo = 0, index_vbo=0, tex_vbo=0;
-
+  GLuint vertex_vbo = 0, normal_vbo = 0, tex_vbo=0;
+  index_vbo = 0;
   //up
   float hx = HEX_WIDTH/2;
   float ym = HEX_HEIGHT/3;
