@@ -15,6 +15,7 @@
 NkOpengl::NkOpengl()
 {
     clickMsg="sel hex:";
+    fpsMsg="FPS:";
 }
 
 NkOpengl::~NkOpengl()
@@ -51,8 +52,10 @@ void NkOpengl::render(){
 
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
-    nkText.renderClickMessage(clickMsg);
-
+    //nkText.renderClickMessage(clickMsg);
+    nkText.renderText(clickMsg, 10, 15, vec4(0,0,0,1));
+    if(showFpsGl)
+        nkText.renderText(fpsMsg, windowWidth-50, 15, vec4(0,0,0,1));
 }
 //Picking technique
 void NkOpengl::leftClick(int x, int y){
@@ -120,4 +123,7 @@ void NkOpengl::move2()
 {
     //kamera.rotatex(-0.05f);
     kamera.translateY(-0.5);
+}
+void NkOpengl::showFps(bool fps){
+    showFpsGl = fps;
 }

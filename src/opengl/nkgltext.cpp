@@ -86,6 +86,28 @@ int NkGlText::Init(int w, int h)
 
     return 1;
 }
+void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
+    float sx = 2.0 / m_duzina;
+    float sy = 2.0 / m_visina;
+
+    glUseProgram(program);
+    glBindVertexArray(vao);
+    glDisable(GL_DEPTH_TEST);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    GLfloat boja[4] = { color[0], color[1], color[2], color[3] };
+
+    /* Set color to black */
+    glUniform4fv(uniform_color, 1, boja);
+    render_text(msg.c_str(), a12, -1 + x * sx, 1 - y * sy, sx, sy);
+
+    glBindVertexArray( 0 );
+    glUseProgram(0);
+    glEnable(GL_DEPTH_TEST);
+
+}
 void NkGlText::renderClickMessage(string msg){
     float sx = 2.0 / m_duzina;
     float sy = 2.0 / m_visina;

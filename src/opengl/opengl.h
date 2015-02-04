@@ -83,6 +83,8 @@ public:
 
     void move1();
     void move2();
+    void setFpsMsg(string msg) {fpsMsg = msg;}
+    void showFps(bool fps);
 private:
     NkHex2 hexMap;      /**< map made of hex poligons */
     NkCamera kamera;    /**< main camera */
@@ -92,6 +94,8 @@ private:
     int windowHeight;
     bool isSelected;
     string clickMsg;
+    string fpsMsg;
+    bool showFpsGl;
 };
 
 #endif // OPENGL_H

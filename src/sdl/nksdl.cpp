@@ -15,7 +15,8 @@
 NkSdl::NkSdl()
 {
     frame = 0;
-    avergeFrame = 60;
+    showFpsGl = true;
+    avergeFrame = 0;
     width = WIDTH;
     height = HEIGHT;
     //Initialize SDL
@@ -135,7 +136,7 @@ void NkSdl::loop()
     SDL_Event e;
     //Enable text input
     SDL_StartTextInput();
-    //While application is running
+    GL->showFps(true);
 
     while( !quit )
     {
@@ -162,19 +163,16 @@ void NkSdl::loop()
 }
 
 void NkSdl::showFpsInTitle(){
-    if(!nkfullScrean){
+    if(showFpsGl){
         frame++;
         //Calculate and correct fps
         if( fpsTimer.getTicks()  >= 1000 )
         {
-            if(!avergeFrame)
-                avergeFrame= avergeFrame+frame;
-            else
-                avergeFrame= (avergeFrame+frame)/2;
-            std::string s = std::to_string(avergeFrame);
+            std::string s = std::to_string(frame);
             s = "FPS: " + s;
             fpsTimer.start();
-            SDL_SetWindowTitle(gWindow,s.c_str());
+            //SDL_SetWindowTitle(gWindow,s.c_str());
+            GL->setFpsMsg(s);
             frame = 0;
         }
     }
@@ -213,6 +211,11 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
         case SDLK_2:
             GL->move2();
             break;
+        case SDLK_F2:
+            showFpsGl = !showFpsGl;
+            GL->showFps(showFpsGl);
+            break;
+
         default:
             break;
         }

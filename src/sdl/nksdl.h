@@ -101,9 +101,10 @@ private:
     NKTimer fpsTimer;           /**< The frames per second timer */
     GLsizei width;              /**< width of window */
     GLsizei  height;                         /**< height of window */
-    static const bool nkfullScrean = false;  /**< is full screan mode*/
+    static const bool nkfullScrean = true;  /**< is full screan mode*/
     static const int WIDTH = 800;            /**< window width*/
     static const int HEIGHT = 600;           /**< window height*/
+    bool showFpsGl;
 };
 
 #endif // NKSDL_H

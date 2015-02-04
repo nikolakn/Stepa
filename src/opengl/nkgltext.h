@@ -176,6 +176,7 @@ private:
 public:
     GLint uniform_tex;
 
+    void renderText(std::string msg, int x, int y, glm::vec4 color);
 private:
     GLuint program;
     GLint attribute_coord;

@@ -2,7 +2,7 @@ emacs file - org mode
 
 
 ** Stepa [0/3] 
-*** TODO [6/18] [33%]
+*** TODO [7/18] [38%]
 - [ ] draw texture on hex 
   (how meny hex texture can be draw without frame drop?)
   this must be answered before continue.
@@ -17,7 +17,7 @@ emacs file - org mode
 - [ ] camera for map
 - [ ] camera for room
 - [ ] log console for fullscrean
-- [ ] fps display option
+- [X] fps display option
 - [X] add hexselect model
 - [X] Picking technique for hex selection 
 - [X] hex instanced rendering 
