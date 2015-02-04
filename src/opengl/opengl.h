@@ -37,7 +37,7 @@
 #include "models/nkhex2.h"
 #include "opengl/nkgltext.h"
 #include "models/nkselecthexmodel.h"
-
+#include "models/nkbleckrect.h"
 /**
  * @brief The NkOpengl class
  * Initialize OpenGL , load models data
@@ -96,6 +96,7 @@ private:
     string clickMsg;
     string fpsMsg;
     bool showFpsGl;
+    NkBleckRect bleckR;
 };
 
 #endif // OPENGL_H

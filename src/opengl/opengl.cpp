@@ -40,6 +40,7 @@ bool  NkOpengl::initGL(int w, int h)
     nkText.Init(w,h);
     hexMap.init();
     selHex.init();
+    bleckR.init();
     //set camera to init possition
     kamera.translateY(9);
     return true;
@@ -53,9 +54,11 @@ void NkOpengl::render(){
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     //nkText.renderClickMessage(clickMsg);
-    nkText.renderText(clickMsg, 10, 15, vec4(0,0,0,1));
+    bleckR.render(kamera.getProjectionMat(),kamera.getModelView());
+    nkText.renderText(clickMsg, 35, 80, vec4(0.8,0.8,0.8,1));
     if(showFpsGl)
-        nkText.renderText(fpsMsg, windowWidth-50, 15, vec4(0,0,0,1));
+        nkText.renderText(fpsMsg, 35, 45, vec4(0.8,0.8,0.8,1));
+
 }
 //Picking technique
 void NkOpengl::leftClick(int x, int y){
