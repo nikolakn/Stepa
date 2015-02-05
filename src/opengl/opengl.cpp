@@ -56,9 +56,9 @@ bool  NkOpengl::initGL(int w, int h)
     map = new NkMapa(56);
 
     //set camera to init possition
-    kamera.translateY(6);
-    kamera.translateZ(-0.5*40);
-    kamera.translateX(-3.0);
+    kamera.translateY(8);
+    kamera.translateZ(-0.5*38);
+    kamera.translateX(-3.5);
     return true;
 }
 
@@ -67,7 +67,7 @@ void NkOpengl::render(){
     glClearColor( 0.f, 50.f, 200.f, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     map->render(kamera.getProjectionMat(),kamera.getModelView());
-    hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
+    hexMap.renderLine(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     bleckR.render(15.0,20.0,200.0,100.0);
 

@@ -77,6 +77,7 @@ public:
      */
     void loadShaders();
     int init(float w, float h);
+    void renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView);
 private:
     const float  HEX_WIDTH=0.2;  	/**<width of one hex */
     const float  HEX_HEIGHT=0.18; 	/**<height of one hex*/
@@ -105,7 +106,7 @@ private:
     GLuint tex;
     GLuint index_vbo;
     GLuint programsel;
-
+    GLuint programline;
 
 };
 

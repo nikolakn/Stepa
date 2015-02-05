@@ -32,6 +32,7 @@ int NkHex2::init()
 
     program = 0;
     programsel = 0;
+    programline = 0;
     this->loadShaders();
     //program1
     gbuffer_instanced_mvp_mat_loc = glGetUniformLocation( program, "mvp" );
@@ -56,15 +57,41 @@ void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 
     //glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, tex);
-
+    //glEnable(GL_LINE_SMOOTH);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //upload the instance data
     //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_TRIANGLE_FAN, 8, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+}
+void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
+{
+    glUseProgram(programline);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //instanced rendering
+    glUniformMatrix4fv(gbuffer_instanced_mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
+    glUniformMatrix4fv(gbuffer_instanced_view, 1, GL_FALSE, glm::value_ptr(*mModelView));
+    glBindVertexArray( box );
+
+    //glActiveTexture(GL_TEXTURE0);
+    //glBindTexture(GL_TEXTURE_2D, tex);
+    glEnable(GL_LINE_SMOOTH);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //upload the instance data
+    //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
+
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
+    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glBindSampler(0,0);
+    glBindVertexArray( 0 );
+    glUseProgram(0);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 }
 void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
@@ -81,7 +108,7 @@ void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     //you need to upload sizeof( vec4 ) * number_of_cubes bytes, DYNAMIC_DRAW because it is updated per frame
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_TRIANGLE_FAN, 8, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
@@ -115,7 +142,7 @@ GLuint NkHex2::createBuffer()
   float hx = HEX_WIDTH/2;
   float ym = HEX_HEIGHT/3;
   float yh = HEX_HEIGHT-ym;
-  vertices.push_back( vec3( 0, 0, 0 ) );
+  //vertices.push_back( vec3( 0, 0, 0 ) );
   vertices.push_back( vec3( -hx,0,  ym ) );
   vertices.push_back( vec3( 0, 0, yh ) );
   vertices.push_back( vec3( hx, 0, ym ) );
@@ -130,8 +157,8 @@ GLuint NkHex2::createBuffer()
   indices.push_back( 3 );
   indices.push_back( 4 );
   indices.push_back( 5 );
-  indices.push_back( 6 );
-  indices.push_back( 1 );
+  //indices.push_back( 6 );
+  //indices.push_back( 1 );
 
   normals.push_back( vec3( 0, 1, 0 ) );
   normals.push_back( vec3( 0, 1, 0 ) );
@@ -141,7 +168,7 @@ GLuint NkHex2::createBuffer()
   normals.push_back( vec3( 0, 1, 0 ) );
   normals.push_back( vec3( 0, 1, 0 ) );
 
-  texture.push_back(vec2(0.5,0.5));
+  //texture.push_back(vec2(0.5,0.5));
   texture.push_back(vec2(0,0.2));
   texture.push_back(vec2(0.5,0));
   texture.push_back(vec2(1,0.2));
@@ -273,11 +300,54 @@ void NkHex2::loadShaders(){
         "}\n"
     };
 
+    string linevertexShaderSource = {
+        "#version 330\n"
+        "uniform mat4 mvp;\n"
+        "uniform mat4 view;\n"
+        "uniform mat3 normal_mat;\n"
+        "layout(location=0) in vec4 in_vertex;\n"
+        "layout(location=1) in vec3 in_normal;\n"
+        "layout(location=2) in vec2 in_tex;\n"
+        "flat out int InstanceID;\n"
+        "void main()\n"
+        "{\n"
+        "  vec4 vr= in_vertex;\n"
+        "  int N="+n+";\n"
+        "  int red=(gl_InstanceID/N);\n"
+        "int col=(gl_InstanceID%N);\n"
+        "  vr.z += red*"+sidey+";\n"
+        "  if (red%2!=0)\n"
+        "    vr.x += "+sidex+"*(gl_InstanceID%N);\n"
+        "  else\n"
+        "    vr.x += "+sidex+"*(gl_InstanceID%N)+0.1;\n"
+        "  gl_Position = mvp * view * vr;\n"
+        "if (red >= 128)\n"
+        "    red=red+1;\n"
+        "if (col >=128)\n"
+        "    col=col+1;	\n"
+        "float redf= red/256.0;\n"
+        "float colf= col/256.0;\n"
+        "  InstanceID = gl_InstanceID;\n"
+        "}\n"
+    };
+    string linefragmentShaderSource = {
+        "#version 330\n"
+        "uniform sampler2D gSampler;\n"
+        "flat in int InstanceID;\n"
+        "out vec4 color;\n"
+        "void main()\n"
+        "{\n"
+        "   color = vec4(0.5f,0.5f,0.5f,0.6f);\n"
+        "}\n"
+    };
     frm.load_string_shader(vertexShaderSource, program, GL_VERTEX_SHADER);
     frm.load_string_shader(fragmentShaderSource, program, GL_FRAGMENT_SHADER);
 
     frm.load_string_shader(selvertexShaderSource, programsel, GL_VERTEX_SHADER);
     frm.load_string_shader(selfragmentShaderSource, programsel, GL_FRAGMENT_SHADER);
+
+    frm.load_string_shader(linevertexShaderSource, programline, GL_VERTEX_SHADER);
+    frm.load_string_shader(linefragmentShaderSource, programline, GL_FRAGMENT_SHADER);
 }
 
 
