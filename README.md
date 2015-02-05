@@ -14,9 +14,3 @@ OpenGL 3.3 core profile
 build:
 qmake;
 make
-
-tested:
-
-Linux Mint 17.1 Mate 64-bit
-
-Windows 7 32-bit
