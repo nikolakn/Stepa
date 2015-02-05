@@ -89,6 +89,7 @@ void NkSdl::initGlew(){
 void NkSdl::setDisplayMode(){
     if(nkfullScrean){
         SDL_DisplayMode current;
+
         //for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
 
             int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);

@@ -2,7 +2,7 @@ SOURCES += \
     src/main.cpp \
     src/sdl/nksdl.cpp \
     src/opengl/camera.cpp \
-    src/opengl/nkgltext.cpp \
+    src/models/nkgltext.cpp \
     src/opengl/opengl.cpp \
     src/models/nkhex2.cpp \
     src/sdl/nktimer.cpp \
@@ -12,7 +12,7 @@ SOURCES += \
 HEADERS += \
     src/sdl/nksdl.h \
     src/opengl/camera.h \
-    src/opengl/nkgltext.h \
+    src/models/nkgltext.h \
     src/opengl/opengl.h \
     src/models/nkhex2.h \
     src/models/nkmodel.h \

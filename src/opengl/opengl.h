@@ -35,7 +35,7 @@
 
 #include "opengl/camera.h"
 #include "models/nkhex2.h"
-#include "opengl/nkgltext.h"
+#include "models/nkgltext.h"
 #include "models/nkselecthexmodel.h"
 #include "models/nkbleckrect.h"
 /**
