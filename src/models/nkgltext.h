@@ -16,7 +16,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <string>
-
+#include "nkmodel.h"
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -162,16 +162,19 @@ struct atlas {
  * @brief The NkGlText class
  * render text in OpenGL
  */
-class NkGlText
+class NkGlText : public NkModel
 {
 public:
 
     NkGlText();
     ~NkGlText();
-    int Init(int w, int h);
-    void render();
+    int init(float w, float h);
+    void render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView);
     void renderClickMessage(std::string msg);
     void releaseScene();
+    int init();
+    GLuint createBuffer();
+    void loadShaders();
 private:
     void render_text(const char *text, atlas * a, float x, float y, float sx, float sy);
 
@@ -201,8 +204,9 @@ private:
     atlas *a24;
     atlas *a12;
 
-    int m_duzina;
-    int m_visina;
+    float m_duzina;
+    float m_visina;
+
 
 };
 

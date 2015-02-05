@@ -6,12 +6,17 @@ NkSelectHexModel::NkSelectHexModel()
 {
 }
 
+NkSelectHexModel::~NkSelectHexModel()
+{
+    releaseScene();
+}
 
-void NkSelectHexModel::init()
+
+int NkSelectHexModel::init()
 {
     FreeImage_Initialise(true);
     setXY(74,49);
-    selvao = createHex();
+    selvao = createBuffer();
     glBindVertexArray( selvao );
 
 
@@ -22,6 +27,7 @@ void NkSelectHexModel::init()
     view_mat_loc = glGetUniformLocation( program, "view" );
 
     tex = frm.loadTexture("./data/textures/hexselect2.png");
+    return 1;
 }
 
 void NkSelectHexModel::render(mat4 *ProjectionMatrix, mat4 *mModelView)
@@ -66,7 +72,7 @@ void NkSelectHexModel::releaseScene()
 }
 
 
-GLuint NkSelectHexModel::createHex()
+GLuint NkSelectHexModel::createBuffer()
 {
     vector<vec3> vertices;
     vector<vec2> texture;
@@ -158,4 +164,23 @@ void NkSelectHexModel::loadShaders()
     };
     frm.load_string_shader(vertexShaderSource, program, GL_VERTEX_SHADER);
     frm.load_string_shader(fragmentShaderSource, program, GL_FRAGMENT_SHADER);
+}
+
+
+int NkSelectHexModel::init(float, float)
+{
+    FreeImage_Initialise(true);
+    setXY(74,49);
+    selvao = createBuffer();
+    glBindVertexArray( selvao );
+
+
+    program = 0;
+    this->loadShaders();
+    //program1
+    mvp_mat_loc = glGetUniformLocation( program, "mvp" );
+    view_mat_loc = glGetUniformLocation( program, "view" );
+
+    tex = frm.loadTexture("./data/textures/hexselect2.png");
+    return 1;
 }

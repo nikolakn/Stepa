@@ -47,7 +47,7 @@ NkGlText::~NkGlText()
     delete(a12);
 }
 
-int NkGlText::Init(int w, int h)
+int NkGlText::init(float w, float h)
 {
     face = 0;
     m_duzina=w;
@@ -95,9 +95,8 @@ int NkGlText::Init(int w, int h)
     //a24 = new atlas(face, 24, uniform_tex);
     a12 = new atlas(face, 14, uniform_tex);
     glUseProgram(0);
-
-
     return 1;
+
 }
 void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
     float sx = 2.0 / m_duzina;
@@ -181,7 +180,7 @@ void NkGlText::releaseScene()
 
 }
 
-void NkGlText::render()
+void NkGlText::render(glm::mat4 *, glm::mat4 *)
 {
     float sx = 2.0 / m_duzina;
     float sy = 2.0 / m_visina;
@@ -257,3 +256,18 @@ void NkGlText::render_text(const char *text, atlas * a, float x, float y, float 
 
 }
 
+
+
+int NkGlText::init()
+{
+    return 0;
+}
+
+GLuint NkGlText::createBuffer()
+{
+    return 0;
+}
+
+void NkGlText::loadShaders()
+{
+}

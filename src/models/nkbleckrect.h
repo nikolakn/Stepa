@@ -7,13 +7,14 @@ class NkBleckRect : public NkModel
 {
 public:
     NkBleckRect();
-    void init();
+    ~NkBleckRect();
+    int init();
     void render(mat4 *ProjectionMatrix, mat4 *mModelView);
     void render(float x, float y, float w, float h);
     void releaseScene();
-    GLuint createHex();
+    GLuint createBuffer();
     void loadShaders();
-    void init(int w, int h);
+    int init(float w, float h);
 
     int duzina() const;
     void setDuzina(int duzina);
@@ -26,8 +27,8 @@ private:
     GLint view_mat_loc;
     GLuint index_vbo;
     GLuint vertex_vbo;
-    int m_duzina;
-    int m_visina;
+    float m_duzina;
+    float m_visina;
 };
 
 #endif // NKBLECKRECT_H

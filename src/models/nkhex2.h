@@ -31,11 +31,11 @@ class NkHex2 : public NkModel
 {
 public:
     NkHex2();
-
+    ~NkHex2();
     /**
      * @brief init load and bind data
      */
-    void init();
+    int init();
 
     /**
      * @brief renderSel  hex map without texture. use shader programsel.
@@ -69,14 +69,14 @@ public:
      * @brief createHex bind buffers
      * @return vao
      */
-    GLuint createHex();
+    GLuint createBuffer();
 
     /**
      * @brief LoadShaders
      * load shaders from string with constants in compile time
      */
     void loadShaders();
-
+    int init(float w, float h);
 private:
     const float  HEX_WIDTH=0.2;  	/**<width of one hex */
     const float  HEX_HEIGHT=0.18; 	/**<height of one hex*/
@@ -85,8 +85,8 @@ private:
      *for selection to work nuber of hex<=65536
      *for more hex: shader program programsel need to be changed to include blue color too
      **/
-    const int HEX_SIZE = 40000;
-    const int HEX_LINE_NUM = 200;   /**<number of hex in one line*/
+    const int HEX_SIZE = 32886;
+    const int HEX_LINE_NUM = 174;   /**<number of hex in one line*/
 
     GLuint box;
     GLint gbuffer_instanced_mvp_mat_loc;
@@ -105,6 +105,8 @@ private:
     GLuint tex;
     GLuint index_vbo;
     GLuint programsel;
+
+
 };
 
 #endif // NKHEX2_H

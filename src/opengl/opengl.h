@@ -33,11 +33,17 @@
 #include <SDL2/SDL_opengl.h>
 #endif
 
+#include <vector>
+
 #include "opengl/camera.h"
+#include "models/nkmodel.h"
 #include "models/nkhex2.h"
 #include "models/nkgltext.h"
 #include "models/nkselecthexmodel.h"
 #include "models/nkbleckrect.h"
+#include "models/nkmapa.h"
+using namespace std;
+
 /**
  * @brief The NkOpengl class
  * Initialize OpenGL , load models data
@@ -91,6 +97,7 @@ private:
     NkCamera kamera;    /**< main camera */
     NkGlText nkText;    /**< display text on screen */
     NkSelectHexModel selHex;  /**< draw selection mark */
+
     int windowWidth;
     int windowHeight;
     bool isSelected;
@@ -98,6 +105,7 @@ private:
     string fpsMsg;
     bool showFpsGl;
     NkBleckRect bleckR;
+    NkMapa *map;
 };
 
 #endif // OPENGL_H

@@ -18,11 +18,16 @@ NkHex2::NkHex2()
 
 }
 
-void NkHex2::init()
+NkHex2::~NkHex2()
+{
+    releaseScene();
+}
+
+int NkHex2::init()
 {
     FreeImage_Initialise(true);
 
-    box = createHex();
+    box = createBuffer();
     glBindVertexArray( box );
 
     program = 0;
@@ -37,7 +42,8 @@ void NkHex2::init()
     gbuffer_instanced_normal_mat_loc_sel = glGetUniformLocation( programsel, "normal_mat" );
     gbuffer_instanced_view_sel = glGetUniformLocation( programsel, "view" );
 
-    tex = frm.loadTexture("./data/textures/hextex.png");
+    tex = frm.loadTexture("./data/textures/hexclear.png");
+    return 1;
 }
 
 void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
@@ -94,7 +100,7 @@ void NkHex2::releaseScene()
     glDeleteVertexArrays(1, &box);
 }
 
-GLuint NkHex2::createHex()
+GLuint NkHex2::createBuffer()
 {
   vector<vec3> vertices;
   vector<vec3> normals;
@@ -272,4 +278,10 @@ void NkHex2::loadShaders(){
 
     frm.load_string_shader(selvertexShaderSource, programsel, GL_VERTEX_SHADER);
     frm.load_string_shader(selfragmentShaderSource, programsel, GL_FRAGMENT_SHADER);
+}
+
+
+int NkHex2::init(float, float)
+{
+    return init();
 }

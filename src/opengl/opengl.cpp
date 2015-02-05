@@ -24,6 +24,7 @@ NkOpengl::~NkOpengl()
     hexMap.releaseScene();
     selHex.releaseScene();
     nkText.releaseScene();
+    delete map;
 }
 void  NkOpengl::resize(int w, int h){
     bleckR.setDuzina(w);
@@ -48,12 +49,16 @@ bool  NkOpengl::initGL(int w, int h)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    nkText.Init(w,h);
-    hexMap.init();
-    selHex.init();
+    nkText.init(w,h);
+    hexMap.init(w,h);
+    selHex.init(w,h);
     bleckR.init(w,h);
+    map = new NkMapa(56);
+
     //set camera to init possition
-    kamera.translateY(9);
+    kamera.translateY(6);
+    kamera.translateZ(-0.5*40);
+    kamera.translateX(-3.0);
     return true;
 }
 
@@ -61,10 +66,11 @@ bool  NkOpengl::initGL(int w, int h)
 void NkOpengl::render(){
     glClearColor( 0.f, 50.f, 200.f, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
+    map->render(kamera.getProjectionMat(),kamera.getModelView());
     hexMap.render(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     bleckR.render(15.0,20.0,200.0,100.0);
+
     nkText.renderText(clickMsg, 35, 60, vec4(0.8,0.8,0.8,1));
     if(showFpsGl)
         nkText.renderText(fpsMsg, 35, 40, vec4(0.8,0.8,0.8,1));

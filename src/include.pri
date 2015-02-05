@@ -7,7 +7,9 @@ SOURCES += \
     src/models/nkhex2.cpp \
     src/sdl/nktimer.cpp \
     src/models/nkselecthexmodel.cpp \
-    src/models/nkbleckrect.cpp
+    src/models/nkbleckrect.cpp \
+    src/models/nkmaptexture.cpp \
+    src/models/nkmapa.cpp
 
 HEADERS += \
     src/sdl/nksdl.h \
@@ -27,5 +29,7 @@ HEADERS += \
     src/bandit/test_run_error.h \
     src/sdl/nktimer.h \
     src/models/nkselecthexmodel.h \
-    src/models/nkbleckrect.h
+    src/models/nkbleckrect.h \
+    src/models/nkmaptexture.h \
+    src/models/nkmapa.h
 

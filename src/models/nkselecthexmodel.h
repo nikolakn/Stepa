@@ -30,10 +30,12 @@ class NkSelectHexModel : public NkModel
 {
 public:
     NkSelectHexModel();
+    ~NkSelectHexModel();
     /**
      * @brief init load and bind data
      */
-    void init();
+    int init();
+    int init(float w, float h);
     void render(mat4 *ProjectionMatrix, mat4 *mModelView);
     void releaseScene();
 
@@ -41,7 +43,7 @@ public:
      * @brief createHex bind buffers
      * @return vao
      */
-    GLuint createHex();
+    GLuint createBuffer();
 
     /**
      * @brief LoadShaders
@@ -62,10 +64,10 @@ private:
     GLint gbuffer_instanced_pos;
     GLuint vertex_vbo;
     GLuint tex_vbo;
-    vector<vec4> positions;
     GLuint tex;
     GLuint programsel;
     GLuint index_vbo;
+
 
 };
 

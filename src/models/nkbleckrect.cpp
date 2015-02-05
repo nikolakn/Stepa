@@ -4,15 +4,21 @@ NkBleckRect::NkBleckRect()
 {
 }
 
+NkBleckRect::~NkBleckRect()
+{
+    releaseScene();
+}
 
-void NkBleckRect::init()
+
+int NkBleckRect::init()
 {
     FreeImage_Initialise(true);
-    selvao = createHex();
+    selvao = createBuffer();
     glBindVertexArray( selvao );
     program = 0;
     this->loadShaders();
     view_mat_loc = glGetUniformLocation( program, "view" );
+    return 1;
 }
 
 void NkBleckRect::render(mat4 *, mat4 *)
@@ -83,7 +89,7 @@ void NkBleckRect::releaseScene()
     glDeleteVertexArrays(1, &selvao);
 }
 
-GLuint NkBleckRect::createHex()
+GLuint NkBleckRect::createBuffer()
 {
     vector<vec3> vertices;
     vector<unsigned int> indices;
@@ -143,17 +149,18 @@ void NkBleckRect::loadShaders()
     frm.load_string_shader(fragmentShaderSource, program, GL_FRAGMENT_SHADER);
 }
 
-void NkBleckRect::init(int w, int h)
+int NkBleckRect::init(float w, float h)
 {
     m_duzina=w;
     m_visina=h;
     FreeImage_Initialise(true);
-    selvao = createHex();
+    selvao = createBuffer();
     glBindVertexArray( selvao );
 
     program = 0;
     this->loadShaders();
     view_mat_loc = glGetUniformLocation( program, "view" );
+    return 1;
 }
 int NkBleckRect::duzina() const
 {
