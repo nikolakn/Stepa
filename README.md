@@ -1,7 +1,9 @@
 # Stepa
-Hex game 
+Huge hex map of Europe that can be used in games.
+map is made of 35000 hexes.
 
 OpenGL 3.3 core profile
+
 ##Build Dependencies##
 
 - [GLEW](http://glew.sourceforge.net/)
