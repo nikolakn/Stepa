@@ -73,7 +73,7 @@ void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 {
     glUseProgram(programline);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     //instanced rendering
     glUniformMatrix4fv(gbuffer_instanced_mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
     glUniformMatrix4fv(gbuffer_instanced_view, 1, GL_FALSE, glm::value_ptr(*mModelView));
@@ -88,6 +88,7 @@ void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
     glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
@@ -337,7 +338,7 @@ void NkHex2::loadShaders(){
         "out vec4 color;\n"
         "void main()\n"
         "{\n"
-        "   color = vec4(0.5f,0.5f,0.5f,0.6f);\n"
+        "   color = vec4(0.5f,0.5f,0.5f,0.3f);\n"
         "}\n"
     };
     frm.load_string_shader(vertexShaderSource, program, GL_VERTEX_SHADER);
