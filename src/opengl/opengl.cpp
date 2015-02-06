@@ -20,10 +20,6 @@ NkOpengl::NkOpengl()
 
 NkOpengl::~NkOpengl()
 {
-    bleckR.releaseScene();
-    hexMap.releaseScene();
-    selHex.releaseScene();
-    nkText.releaseScene();
     delete map;
 }
 void  NkOpengl::resize(int w, int h){

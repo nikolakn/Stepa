@@ -63,7 +63,7 @@ void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
@@ -72,6 +72,7 @@ void NkHex2::render(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 }
 void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
 {
+
     glUseProgram(programline);
 
     //instanced rendering
@@ -85,14 +86,40 @@ void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //upload the instance data
     //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
-
+glGetError();
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_LINES, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
 
-    glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
+    GLenum glError = glGetError();
+    if(glError)
+    {
+        cout << "!!!!!!!!!!!!!!!!!!!!!!!!! "<< endl;
+
+        switch (glError)
+        {
+            case GL_INVALID_ENUM:
+                cout << "Invalid enum." << endl;
+                break;
+
+            case GL_INVALID_VALUE:
+                cout << "Invalid value." << endl;
+                break;
+
+            case GL_INVALID_OPERATION:
+                cout << "Invalid operation." << endl;
+
+            default:
+                cout << "Unrecognised GLenum." << endl;
+                break;
+        }
+
+        //cout << "See https://www.opengl.org/sdk/docs/man/html/glTexImage2D.xhtml for further details." << endl;
+    }
 
 }
 void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
@@ -109,7 +136,7 @@ void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     //you need to upload sizeof( vec4 ) * number_of_cubes bytes, DYNAMIC_DRAW because it is updated per frame
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_POLYGON, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_TRIANGLE_FAN, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);

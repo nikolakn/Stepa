@@ -25,26 +25,13 @@ using namespace std;
 */
 NkGlText::NkGlText()
 {
-
 }
 
 NkGlText::~NkGlText()
 {
     if (face != nullptr)
-        delete face;
-    glUseProgram(0);
-    glDeleteProgram(program);
-    glDeleteBuffers(1,&vbo);
-    glDeleteVertexArrays(1, &vao);
-    if(fontfilename != nullptr)
-        delete(fontfilename);
     if(ft != nullptr)
-        delete(ft);
-    if(face != nullptr)
-        delete(face);
-    //delete(a48);
-    //delete(a24);
-    delete(a12);
+    releaseScene();
 }
 
 int NkGlText::init(float w, float h)
@@ -52,13 +39,13 @@ int NkGlText::init(float w, float h)
     face = 0;
     m_duzina=w;
     m_visina=h;
-
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
     fontfilename = "./data/font/FreeSans.ttf";
     face = new FT_Face();
     ft = new FT_Library();
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+
     /* Initialize the FreeType2 library */
     if (FT_Init_FreeType(ft)) {
         fprintf(stderr, "Could not init freetype library\n");
@@ -171,9 +158,6 @@ void NkGlText::releaseScene()
     glDeleteProgram(program);
     glDeleteBuffers(1,&vbo);
     glDeleteVertexArrays(1, &vao);
-    delete(fontfilename);
-    delete(ft);
-    delete(face);
     //delete(a48);
     //delete(a24);
     delete(a12);
