@@ -181,7 +181,7 @@ private:
 public:
     GLint uniform_tex;
 
-    void renderText(std::string msg, int x, int y, glm::vec4 color);
+    void renderText(std::string msg, int x, int y, glm::vec4 color, int size);
     int duzina() const;
     void setDuzina(int duzina);
 

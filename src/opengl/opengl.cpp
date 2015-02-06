@@ -30,6 +30,24 @@ void  NkOpengl::resize(int w, int h){
     kamera.setProjection3D(45.0f, (float)w/(float)h , 0.001f, 1000.0f);
 }
 
+void NkOpengl::LScreen()
+{
+    /* Enable blending, necessary for our alpha texture */
+
+    glClearColor( 0.f, 50.f, 200.f, 1.f );
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    nkText.init(windowWidth,windowHeight);
+    loadScreen.init(windowWidth,windowHeight);
+    loadScreen.render(0,0);
+    nkText.renderText("Loading...", windowWidth/2-40, windowHeight/2, vec4(1,1,1,1),2);
+
+}
+void NkOpengl::LoadModels(){
+    hexMap.init(windowWidth,windowHeight);
+    selHex.init(windowWidth,windowHeight);
+    bleckR.init(windowWidth,windowHeight);
+    map = new NkMapa(56);
+}
 
 bool  NkOpengl::initGL(int w, int h)
 {
@@ -45,12 +63,6 @@ bool  NkOpengl::initGL(int w, int h)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    nkText.init(w,h);
-    hexMap.init(w,h);
-    selHex.init(w,h);
-    bleckR.init(w,h);
-    map = new NkMapa(56);
-
     //set camera to init possition
     kamera.translateY(8);
     kamera.translateZ(-0.5*38);
@@ -62,16 +74,18 @@ bool  NkOpengl::initGL(int w, int h)
 void NkOpengl::render(){
     glClearColor( 0.f, 50.f, 200.f, 1.f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
     map->render(kamera.getProjectionMat(),kamera.getModelView());
     hexMap.renderLine(kamera.getProjectionMat(),kamera.getModelView());
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     bleckR.render(15.0,20.0,200.0,100.0);
 
-    nkText.renderText(clickMsg, 35, 60, vec4(0.8,0.8,0.8,1));
+    nkText.renderText(clickMsg, 35, 60, vec4(0.8,0.8,0.8,1),1);
     if(showFpsGl)
-        nkText.renderText(fpsMsg, 35, 40, vec4(0.8,0.8,0.8,1));
-    nkText.renderText("F11 toggle FS", 35, 80, vec4(1,0.4,0.1,1));
-    nkText.renderText("arraw kays to move", 35, 100, vec4(1,0.4,0.1,1));
+        nkText.renderText(fpsMsg, 35, 40, vec4(0.8,0.8,0.8,1),1);
+    nkText.renderText("F11 toggle FS", 35, 80, vec4(1,0.4,0.1,1),1);
+    nkText.renderText("arraw kays to move", 35, 100, vec4(1,0.4,0.1,1),1);
+
 
 }
 //Picking technique

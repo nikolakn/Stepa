@@ -139,6 +139,9 @@ void NkSdl::loop()
     SDL_StartTextInput();
     GL->showFps(true);
 
+    GL->LScreen();
+    SDL_GL_SwapWindow( gWindow );
+    GL->LoadModels();
     while( !quit )
     {
         //Handle events on queue

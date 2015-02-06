@@ -79,13 +79,13 @@ int NkGlText::init(float w, float h)
     glUseProgram(program);
     /* Create texture atlasses for several font sizes */
     //a48 = new atlas(face, 48, uniform_tex);
-    //a24 = new atlas(face, 24, uniform_tex);
+    a24 = new atlas(face, 24, uniform_tex);
     a12 = new atlas(face, 14, uniform_tex);
     glUseProgram(0);
     return 1;
 
 }
-void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
+void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color, int size){
     float sx = 2.0 / m_duzina;
     float sy = 2.0 / m_visina;
 
@@ -100,8 +100,10 @@ void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
 
     /* Set color to black */
     glUniform4fv(uniform_color, 1, boja);
-    render_text(msg.c_str(), a12, -1 + x * sx, 1 - y * sy, sx, sy);
-
+    if(size ==1 )
+        render_text(msg.c_str(), a12, -1 + x * sx, 1 - y * sy, sx, sy);
+    else
+        render_text(msg.c_str(), a24, -1 + x * sx, 1 - y * sy, sx, sy);
     glBindVertexArray( 0 );
     glUseProgram(0);
     glEnable(GL_DEPTH_TEST);
@@ -159,7 +161,7 @@ void NkGlText::releaseScene()
     glDeleteBuffers(1,&vbo);
     glDeleteVertexArrays(1, &vao);
     //delete(a48);
-    //delete(a24);
+    delete(a24);
     delete(a12);
 
 }
