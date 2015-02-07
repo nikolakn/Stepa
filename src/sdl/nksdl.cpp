@@ -56,7 +56,7 @@ NkSdl::NkSdl()
         }
     }
     //Use Vsync
-    if( SDL_GL_SetSwapInterval( 1 ) < 0 )
+    if( SDL_GL_SetSwapInterval( 0 ) < 0 )
         cout <<"Warning: Unable to set VSync! SDL Error: "<< SDL_GetError()<<endl;
 
     GL = new NkOpengl();
