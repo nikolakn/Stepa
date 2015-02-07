@@ -43,6 +43,7 @@
 #include "models/nkbleckrect.h"
 #include "models/nkmapa.h"
 #include "models/nkloadscreen.h"
+#include "models/nkunitrender.h"
 using namespace std;
 
 /**
@@ -110,6 +111,7 @@ private:
     NkBleckRect bleckR;
     NkMapa *map;
     NkLoadscreen loadScreen;
+    NkUnitRender unitsRender;
 };
 
 #endif // OPENGL_H

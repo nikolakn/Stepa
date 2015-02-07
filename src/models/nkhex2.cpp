@@ -86,40 +86,12 @@ void NkHex2::renderLine(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     //upload the instance data
     //glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
-glGetError();
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    glDrawElementsInstanced( GL_LINES, 6, GL_UNSIGNED_INT, 0, HEX_SIZE);
+    glDrawElementsInstanced( GL_LINE_STRIP, 7, GL_UNSIGNED_INT, 0, HEX_SIZE);
 
     glBindVertexArray( 0 );
     glUseProgram(0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
-    GLenum glError = glGetError();
-    if(glError)
-    {
-        cout << "!!!!!!!!!!!!!!!!!!!!!!!!! "<< endl;
-
-        switch (glError)
-        {
-            case GL_INVALID_ENUM:
-                cout << "Invalid enum." << endl;
-                break;
-
-            case GL_INVALID_VALUE:
-                cout << "Invalid value." << endl;
-                break;
-
-            case GL_INVALID_OPERATION:
-                cout << "Invalid operation." << endl;
-
-            default:
-                cout << "Unrecognised GLenum." << endl;
-                break;
-        }
-
-        //cout << "See https://www.opengl.org/sdk/docs/man/html/glTexImage2D.xhtml for further details." << endl;
-    }
 
 }
 void NkHex2::renderSel(glm::mat4 *ProjectionMatrix, glm::mat4 *mModelView)
@@ -185,7 +157,7 @@ GLuint NkHex2::createBuffer()
   indices.push_back( 3 );
   indices.push_back( 4 );
   indices.push_back( 5 );
-  //indices.push_back( 6 );
+  indices.push_back( 0 );
   //indices.push_back( 1 );
 
   normals.push_back( vec3( 0, 1, 0 ) );

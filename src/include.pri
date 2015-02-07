@@ -10,7 +10,8 @@ SOURCES += \
     src/models/nkbleckrect.cpp \
     src/models/nkmaptexture.cpp \
     src/models/nkmapa.cpp \
-    $$PWD/models/nkloadscreen.cpp
+    $$PWD/models/nkloadscreen.cpp \
+    src/models/nkunitrender.cpp
 
 HEADERS += \
     src/sdl/nksdl.h \
@@ -33,5 +34,6 @@ HEADERS += \
     src/models/nkbleckrect.h \
     src/models/nkmaptexture.h \
     src/models/nkmapa.h \
-    $$PWD/models/nkloadscreen.h
+    $$PWD/models/nkloadscreen.h \
+    src/models/nkunitrender.h
 
