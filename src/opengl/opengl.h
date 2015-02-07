@@ -42,6 +42,7 @@
 #include "models/nkselecthexmodel.h"
 #include "models/nkbleckrect.h"
 #include "models/nkmapa.h"
+#include "models/nkloadscreen.h"
 using namespace std;
 
 /**
@@ -92,6 +93,8 @@ public:
     void setFpsMsg(string msg) {fpsMsg = msg;}
     void showFps(bool fps);
     void resize(int w, int h);
+    void LScreen();
+    void LoadModels();
 private:
     NkHex2 hexMap;      /**< map made of hex poligons */
     NkCamera kamera;    /**< main camera */
@@ -106,6 +109,7 @@ private:
     bool showFpsGl;
     NkBleckRect bleckR;
     NkMapa *map;
+    NkLoadscreen loadScreen;
 };
 
 #endif // OPENGL_H

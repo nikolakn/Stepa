@@ -25,26 +25,13 @@ using namespace std;
 */
 NkGlText::NkGlText()
 {
-
 }
 
 NkGlText::~NkGlText()
 {
     if (face != nullptr)
-        delete face;
-    glUseProgram(0);
-    glDeleteProgram(program);
-    glDeleteBuffers(1,&vbo);
-    glDeleteVertexArrays(1, &vao);
-    if(fontfilename != nullptr)
-        delete(fontfilename);
     if(ft != nullptr)
-        delete(ft);
-    if(face != nullptr)
-        delete(face);
-    //delete(a48);
-    //delete(a24);
-    delete(a12);
+    releaseScene();
 }
 
 int NkGlText::init(float w, float h)
@@ -52,13 +39,13 @@ int NkGlText::init(float w, float h)
     face = 0;
     m_duzina=w;
     m_visina=h;
-
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
     fontfilename = "./data/font/FreeSans.ttf";
     face = new FT_Face();
     ft = new FT_Library();
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+
     /* Initialize the FreeType2 library */
     if (FT_Init_FreeType(ft)) {
         fprintf(stderr, "Could not init freetype library\n");
@@ -92,13 +79,13 @@ int NkGlText::init(float w, float h)
     glUseProgram(program);
     /* Create texture atlasses for several font sizes */
     //a48 = new atlas(face, 48, uniform_tex);
-    //a24 = new atlas(face, 24, uniform_tex);
+    a24 = new atlas(face, 24, uniform_tex);
     a12 = new atlas(face, 14, uniform_tex);
     glUseProgram(0);
     return 1;
 
 }
-void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
+void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color, int size){
     float sx = 2.0 / m_duzina;
     float sy = 2.0 / m_visina;
 
@@ -113,8 +100,10 @@ void NkGlText::renderText(std::string msg,int x ,int y, glm::vec4 color){
 
     /* Set color to black */
     glUniform4fv(uniform_color, 1, boja);
-    render_text(msg.c_str(), a12, -1 + x * sx, 1 - y * sy, sx, sy);
-
+    if(size ==1 )
+        render_text(msg.c_str(), a12, -1 + x * sx, 1 - y * sy, sx, sy);
+    else
+        render_text(msg.c_str(), a24, -1 + x * sx, 1 - y * sy, sx, sy);
     glBindVertexArray( 0 );
     glUseProgram(0);
     glEnable(GL_DEPTH_TEST);
@@ -171,11 +160,8 @@ void NkGlText::releaseScene()
     glDeleteProgram(program);
     glDeleteBuffers(1,&vbo);
     glDeleteVertexArrays(1, &vao);
-    delete(fontfilename);
-    delete(ft);
-    delete(face);
     //delete(a48);
-    //delete(a24);
+    delete(a24);
     delete(a12);
 
 }

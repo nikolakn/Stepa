@@ -90,23 +90,23 @@ void NkSdl::setDisplayMode(){
     if(nkfullScrean){
         SDL_DisplayMode current;
 
-        //for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
+        for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
 
             int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 
             if(should_be_zero != 0)
                 // In case of error...
-                SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
+                SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
             else
                 // On success, print the current display mode.
-                SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", 0,
+                SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", i,
                         current.w, current.h, current.refresh_rate);
 
             width = current.w;
             height = current.h;
             gWindow = SDL_CreateWindow( "Stepa",  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                       width, height, SDL_WINDOW_OPENGL  |  SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN );
-        //}
+        }
     }
     else{
         gWindow = SDL_CreateWindow( "Stepa",  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -139,6 +139,9 @@ void NkSdl::loop()
     SDL_StartTextInput();
     GL->showFps(true);
 
+    GL->LScreen();
+    SDL_GL_SwapWindow( gWindow );
+    GL->LoadModels();
     while( !quit )
     {
         //Handle events on queue
@@ -333,23 +336,25 @@ int NkSdl::SDL_ToggleFS()
         std::cout << "Toggling fullscreen mode failed: " << SDL_GetError() << std::endl;
         return -1;
     }
-    SDL_DisplayMode current;
-    int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
+    for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i){
+        SDL_DisplayMode current;
+        int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 
-    if(should_be_zero != 0)
-        // In case of error...
-        SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
-    else
-        // On success, print the current display mode.
-        SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", 0,
-                current.w, current.h, current.refresh_rate);
+        if(should_be_zero != 0)
+            // In case of error...
+            SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
+        else
+            // On success, print the current display mode.
+            SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz. \n", i,
+                    current.w, current.h, current.refresh_rate);
 
-    width = current.w;
-    height = current.h;
+        width = current.w;
+        height = current.h;
 
-    if ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
-    {
-        return 1;
+        if ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
+        {
+            return 1;
+        }
     }
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
