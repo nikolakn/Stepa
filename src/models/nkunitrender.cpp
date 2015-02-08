@@ -42,29 +42,23 @@ void NkUnitRender::render(mat4 *ProjectionMatrix, mat4 *mModelView)
     glBindTexture(GL_TEXTURE_2D, tex);
 
     glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
-
-    for(int i=92;i<94;i++){
-        for(int n=75;n<130;n++){
-    setXY(i,n);
-
-    //instanced rendering
     glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
-    //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
-    glm::mat4 mCurrent;
-    mCurrent = glm::translate(*mModelView, glm::vec3(x, 0, y));
-    //mCurrent = glm::scale(mCurrent, glm::vec3(2.0, 2.0, 2.0));
-    //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
-    glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
 
+    for(int i=80;i<80;i++){
+        for(int n=80;n<80;n++){
+            setXY(i,n);
+            //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
+            glm::mat4 mCurrent;
+            mCurrent = glm::translate(*mModelView, glm::vec3(x, 0, y));
+            //mCurrent = glm::scale(mCurrent, glm::vec3(2.0, 2.0, 2.0));
+            //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
+            glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
 
-
-    //glActiveTexture(GL_TEXTURE0);
-
-
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
-    // Draw the vertices
-    glDrawElements(GL_TRIANGLE_FAN, 6 ,GL_UNSIGNED_INT, 0);
-        }}
+            //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
+            // Draw the vertices
+            glDrawElements(GL_TRIANGLE_FAN, 6 ,GL_UNSIGNED_INT, 0);
+            }
+    }
     glDisable( GL_POLYGON_OFFSET_FILL );
 
     glBindSampler(0,0);
