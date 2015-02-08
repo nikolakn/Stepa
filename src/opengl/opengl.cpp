@@ -78,8 +78,9 @@ void NkOpengl::render(){
 
     map->render(kamera.getProjectionMat(),kamera.getModelView());
     hexMap.renderLine(kamera.getProjectionMat(),kamera.getModelView());
-    unitsRender.setXY(5,5);
+
     unitsRender.render(kamera.getProjectionMat(),kamera.getModelView());
+
     selHex.render(kamera.getProjectionMat(),kamera.getModelView());
     bleckR.render(15.0,20.0,200.0,100.0);
 

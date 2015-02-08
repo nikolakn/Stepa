@@ -23,7 +23,7 @@ int NkUnitRender::init()
     mvp_mat_loc = glGetUniformLocation( program, "mvp" );
     view_mat_loc = glGetUniformLocation( program, "view" );
 
-    tex = frm.loadTexture("./data/textures/hexselect2.png");
+    tex = frm.loadTexture("./data/textures/arm.png");
     return 1;
 }
 
@@ -37,7 +37,16 @@ void NkUnitRender::render(mat4 *ProjectionMatrix, mat4 *mModelView)
 {
     glUseProgram(program);
     glEnable( GL_POLYGON_OFFSET_FILL );
-    glPolygonOffset( -1, -1 );
+    glPolygonOffset( -1, 0 );
+    glBindVertexArray( selvao );
+    glBindTexture(GL_TEXTURE_2D, tex);
+
+    glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
+
+    for(int i=92;i<94;i++){
+        for(int n=75;n<130;n++){
+    setXY(i,n);
+
     //instanced rendering
     glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
     //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
@@ -47,17 +56,17 @@ void NkUnitRender::render(mat4 *ProjectionMatrix, mat4 *mModelView)
     //mCurrent = glm::rotate(mCurrent, fRotationAngle*PIover180, glm::vec3(1.0f, 0.0f, 0.0f));
     glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(mCurrent));
 
-    glBindVertexArray( selvao );
+
 
     //glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tex);
 
-    glBindBuffer( GL_ARRAY_BUFFER, index_vbo ); //bind vbo
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_vbo);
     // Draw the vertices
     glDrawElements(GL_TRIANGLE_FAN, 6 ,GL_UNSIGNED_INT, 0);
+        }}
     glDisable( GL_POLYGON_OFFSET_FILL );
+
     glBindSampler(0,0);
     glBindVertexArray( 0 );
     glUseProgram(0);
@@ -83,10 +92,10 @@ GLuint NkUnitRender::createBuffer()
     vertex_vbo = 0;
     tex_vbo=0;
     index_vbo=0;
-    vertices.push_back( vec3( -0.15f, 0, 0.16f ) );
-    vertices.push_back( vec3( -0.15f,0, -0.16f ) );
-    vertices.push_back( vec3( 0.15f, 0, -0.16f ) );
-    vertices.push_back( vec3( 0.15f, 0, 0.16f ) );
+    vertices.push_back( vec3( -0.10f, 0, 0.09f ) );
+    vertices.push_back( vec3( -0.10f,0, -0.09f ) );
+    vertices.push_back( vec3( 0.10f, 0, -0.09f ) );
+    vertices.push_back( vec3( 0.10f, 0, 0.09f ) );
 
     indices.push_back( 0 );
     indices.push_back( 3 );
