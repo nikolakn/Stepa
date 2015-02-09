@@ -3,6 +3,7 @@
 
 #include "include/framework.h"
 #include "nkmodel.h"
+#include "game/nkunits.h"
 
 class NkUnitRender : public NkModel
 {
@@ -30,7 +31,7 @@ private:
     GLuint tex;
     GLuint programsel;
     GLuint index_vbo;
-
+    NkUnits units;
 
 };
 

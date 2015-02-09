@@ -10,16 +10,17 @@ struct Unit
 {
     int x;
     int y;
-    int position;
+    int type;
 };
 
-class NkUnits
+class NkUnits : public std::vector<Unit>
 {
 public:
     NkUnits();
     void addUnit(Unit unit);
+    void addUnit(int x, int y, int type);
 private:
-    vector<Unit> units;
+
 };
 
 #endif // NKUNITS_H
