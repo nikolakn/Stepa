@@ -2,7 +2,9 @@
 #define NKUNITS_H
 
 #include <vector>
+#include <map>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -13,11 +15,10 @@ struct Unit
     int type;
 };
 
-class NkUnits : public std::vector<Unit>
+class NkUnitsPosition : public std::map<int,Unit>
 {
 public:
-    NkUnits();
-    void addUnit(Unit unit);
+    NkUnitsPosition();
     void addUnit(int x, int y, int type);
 private:
 

@@ -1,17 +1,16 @@
 #include "nkunits.h"
 
-NkUnits::NkUnits()
+NkUnitsPosition::NkUnitsPosition()
 {
 }
 
-void NkUnits::addUnit(Unit unit)
+void NkUnitsPosition::addUnit(int x , int y, int type)
 {
-    push_back(unit);
-
-}
-void NkUnits::addUnit(int x , int y, int type)
-{
-    Unit n{x, y, type};
-    push_back(n);
+    Unit un{x, y, type};
+    int n=y*174+x;
+    auto res = this->insert(std::make_pair(n,un));
+    if ( ! res.second ) {
+        cout << "key " <<  n << " already exists " << endl;
+    }
 
 }

@@ -48,8 +48,8 @@ void NkUnitRender::render(mat4 *ProjectionMatrix, mat4 *mModelView)
     glUniformMatrix4fv(mvp_mat_loc, 1, GL_FALSE, glm::value_ptr(*ProjectionMatrix));
 
     for(auto unit : units){
-        int i=unit.x;
-        int n=unit.y;
+        int i=unit.second.x;
+        int n=unit.second.y;
         setXY(i,n);
         //glUniformMatrix4fv(view_mat_loc, 1, GL_FALSE, glm::value_ptr(*mModelView));
         glm::mat4 mCurrent;

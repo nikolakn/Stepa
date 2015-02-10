@@ -31,7 +31,7 @@ private:
     GLuint tex;
     GLuint programsel;
     GLuint index_vbo;
-    NkUnits units;
+    NkUnitsPosition units;
 
 };
 
