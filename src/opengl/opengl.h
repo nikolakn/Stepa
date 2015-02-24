@@ -36,6 +36,7 @@
 #include <vector>
 
 #include "opengl/camera.h"
+#include "opengl/nkhexcamera.h"
 #include "models/nkmodel.h"
 #include "models/nkhex2.h"
 #include "models/nkgltext.h"
@@ -98,7 +99,7 @@ public:
     void LoadModels();
 private:
     NkHex2 hexMap;      /**< map made of hex poligons */
-    NkCamera kamera;    /**< main camera */
+    NkHexCamera kamera;    /**< main camera */
     NkGlText nkText;    /**< display text on screen */
     NkSelectHexModel selHex;  /**< draw selection mark */
 
