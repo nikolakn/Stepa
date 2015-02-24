@@ -74,12 +74,22 @@ void NkHexCamera::translateZ(float amount)
 
 void NkHexCamera::rotateDown(float amount)
 {
-
+    float x=ExtractCameraPos_NoScale(modelView)[0];
+    float y=ExtractCameraPos_NoScale(modelView)[1];
+    float z=ExtractCameraPos_NoScale(modelView)[2];
+    modelView= glm::translate(modelView,glm::vec3(x,y, z));
+    modelView = glm::rotate(modelView, amount, glm::vec3(1.0f, 0.0f, 0.0f));
+    modelView= glm::translate(modelView,glm::vec3(-x,-y, -z));
 }
 
 void NkHexCamera::rotateUp(float amount)
 {
-
+    float x=ExtractCameraPos_NoScale(modelView)[0];
+    float y=ExtractCameraPos_NoScale(modelView)[1];
+    float z=ExtractCameraPos_NoScale(modelView)[2];
+    modelView= glm::translate(modelView,glm::vec3(x,y, z));
+    modelView = glm::rotate(modelView, amount, glm::vec3(-1.0f, 0.0f, 0.0f));
+    modelView= glm::translate(modelView,glm::vec3(-x,-y, -z));
 }
 
 

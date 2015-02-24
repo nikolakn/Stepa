@@ -162,13 +162,13 @@ void NkOpengl::move2()
 void NkOpengl::rotateUp()
 {
     //kamera.rotatex(-0.05f);
-    kamera.rotateUp(0.5);
+    kamera.rotateUp(0.05);
 }
 
 void NkOpengl::rotateDown()
 {
     //kamera.rotatex(-0.05f);
-    kamera.rotateDown(-0.5);
+    kamera.rotateDown(0.05);
 }
 void NkOpengl::showFps(bool fps){
     showFpsGl = fps;
