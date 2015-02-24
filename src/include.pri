@@ -12,7 +12,8 @@ SOURCES += \
     src/models/nkmapa.cpp \
     $$PWD/models/nkloadscreen.cpp \
     src/models/nkunitrender.cpp \
-    src/game/nkunits.cpp
+    src/game/nkunits.cpp \
+    src/opengl/nkhexcamera.cpp
 
 HEADERS += \
     src/sdl/nksdl.h \
@@ -37,5 +38,6 @@ HEADERS += \
     src/models/nkmapa.h \
     $$PWD/models/nkloadscreen.h \
     src/models/nkunitrender.h \
-    src/game/nkunits.h
+    src/game/nkunits.h \
+    src/opengl/nkhexcamera.h
 
