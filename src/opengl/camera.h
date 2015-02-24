@@ -40,6 +40,7 @@ public:
     glm::vec3 ExtractCameraPos_NoScale(const glm::mat4 &a_modelView);
     void translateY(float amount);
     void translateZ(float amount);
+
 private:
     glm::mat4 projection;  /**< Projection matrix */
     glm::mat4 modelView;   /**< View matrix */

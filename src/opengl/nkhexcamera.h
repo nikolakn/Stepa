@@ -30,7 +30,8 @@ public:
     void rotatex(float amount);
     void translateY(float amount);
     void translateZ(float amount);
-
+    void rotateDown(float amount);
+    void rotateUp(float amount);
 private:
     glm::mat4 projection;  /**< Projection matrix */
     glm::mat4 modelView;   /**< View matrix */

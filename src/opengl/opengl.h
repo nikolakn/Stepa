@@ -97,6 +97,8 @@ public:
     void resize(int w, int h);
     void LScreen();
     void LoadModels();
+    void rotateUp();
+    void rotateDown();
 private:
     NkHex2 hexMap;      /**< map made of hex poligons */
     NkHexCamera kamera;    /**< main camera */

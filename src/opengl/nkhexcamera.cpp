@@ -72,5 +72,15 @@ void NkHexCamera::translateZ(float amount)
     modelView= glm::translate(modelView,glm::vec3(0, 0, amount));
 }
 
+void NkHexCamera::rotateDown(float amount)
+{
+
+}
+
+void NkHexCamera::rotateUp(float amount)
+{
+
+}
+
 
 

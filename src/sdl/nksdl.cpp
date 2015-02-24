@@ -269,11 +269,23 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
         case SDLK_DOWN:
             GL->moveDown();
             break;
-        case SDLK_1:
+        case SDLK_KP_PLUS:
             GL->move1();
             break;
-        case SDLK_2:
+        case SDLK_KP_MINUS:
             GL->move2();
+            break;
+        case SDLK_PAGEUP:
+            GL->move1();
+            break;
+        case SDLK_PAGEDOWN:
+            GL->move2();
+            break;
+        case SDLK_1:
+            GL->rotateUp();
+            break;
+        case SDLK_2:
+            GL->rotateDown();
             break;
         case SDLK_F2:
             showFpsGl = !showFpsGl;
