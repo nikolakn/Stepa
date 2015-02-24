@@ -39,6 +39,9 @@ private:
     glm::vec3 position;    /**< position of camera */
     glm::vec3 direction;   /**< look at point */
     glm::vec3 upRot;       /**< Rotation of camera */
+
+    float zoom;
+    float rot;
 };
 
 #endif // NKHEXCAMERA_H

@@ -1,11 +1,13 @@
 #include "nkhexcamera.h"
-
+#include <iostream>
 NkHexCamera::NkHexCamera()
 {
     position = glm::vec3(15,10,10);
     direction = glm::vec3(15, 0, 0);
     upRot = glm::vec3(0, 1, 0);
     setlookAt();
+    zoom =100;
+    rot=100;
 }
 
 void NkHexCamera::setlookAt()
@@ -74,6 +76,9 @@ void NkHexCamera::translateZ(float amount)
 
 void NkHexCamera::rotateDown(float amount)
 {
+    if(rot<=85) return;
+    rot--;
+    //std::cout << rot <<std::endl;
     float x=ExtractCameraPos_NoScale(modelView)[0];
     float y=ExtractCameraPos_NoScale(modelView)[1];
     float z=ExtractCameraPos_NoScale(modelView)[2];
@@ -84,6 +89,10 @@ void NkHexCamera::rotateDown(float amount)
 
 void NkHexCamera::rotateUp(float amount)
 {
+
+    if(rot>=120) return;
+    rot++;
+    //std::cout << rot <<std::endl;
     float x=ExtractCameraPos_NoScale(modelView)[0];
     float y=ExtractCameraPos_NoScale(modelView)[1];
     float z=ExtractCameraPos_NoScale(modelView)[2];
