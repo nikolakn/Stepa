@@ -6,7 +6,7 @@ NkHexCamera::NkHexCamera()
     direction = glm::vec3(15, 0, 0);
     upRot = glm::vec3(0, 1, 0);
     setlookAt();
-    zoom =100;
+    zoom =0;
     rot=100;
 }
 
@@ -66,6 +66,17 @@ void NkHexCamera::translateX(float amount)
 
 void NkHexCamera::translateY(float amount)
 {
+    zoom+=amount;
+    if(zoom>=10){
+        zoom=10;
+        return ;
+    }
+    if(zoom<=-16){
+        zoom=-16;
+        return;
+    }
+
+    //std::cout << zoom <<std::endl;
     modelView= glm::translate(modelView,glm::vec3(0,amount, 0));
 }
 
@@ -89,7 +100,7 @@ void NkHexCamera::rotateDown(float amount)
 
 void NkHexCamera::rotateUp(float amount)
 {
-
+    //rotirati oko selektovanog ne oko kamere!!!!
     if(rot>=120) return;
     rot++;
     //std::cout << rot <<std::endl;
