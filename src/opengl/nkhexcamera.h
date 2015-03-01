@@ -13,12 +13,23 @@ class NkHexCamera
 public:
     NkHexCamera();
 
-    void setProjection3D(float fFOV, float fAspectRatio, float fNear, float fFar);
-
     glm::mat4* getProjectionMat(void) {return &projection;}
     glm::mat4* getModelView() {return &modelView;}
 
     void setlookAt();
+    void setPogled();
+    void rotateDown();
+    void rotateUp();
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+    void zoomIn();
+    void zoomOut();
+
+
+private:
+    void setProjection3D(float fFOV, float fAspectRatio, float fNear, float fFar);
 
     void setModelView(const glm::mat4 &mv);
     void init();
@@ -31,8 +42,7 @@ public:
     void rotatex(float amount);
     void translateY(float amount);
     void translateZ(float amount);
-    void rotateDown(float amount);
-    void rotateUp(float amount);
+
 private:
     glm::mat4 projection;  /**< Projection matrix */
     glm::mat4 modelView;   /**< View matrix */
@@ -43,6 +53,8 @@ private:
 
     float zoom;
     float rot;
+    const float pomak=0.5;
+    const float rotpomak=0.05;
 };
 
 #endif // NKHEXCAMERA_H

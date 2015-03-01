@@ -15,6 +15,13 @@ void NkHexCamera::setlookAt()
     modelView= glm::lookAt(position, direction,  upRot);
 }
 
+void NkHexCamera::setPogled()
+{
+    translateY(8);
+    translateZ(-0.5*38);
+    translateX(-3.5);
+}
+
 void NkHexCamera::setModelView(const glm::mat4 &mv)
 {
     modelView = mv;
@@ -85,7 +92,7 @@ void NkHexCamera::translateZ(float amount)
     modelView= glm::translate(modelView,glm::vec3(0, 0, amount));
 }
 
-void NkHexCamera::rotateDown(float amount)
+void NkHexCamera::rotateDown()
 {
     if(rot<=85) return;
     rot--;
@@ -94,11 +101,11 @@ void NkHexCamera::rotateDown(float amount)
     float y=ExtractCameraPos_NoScale(modelView)[1];
     float z=ExtractCameraPos_NoScale(modelView)[2];
     modelView= glm::translate(modelView,glm::vec3(x,y, z));
-    modelView = glm::rotate(modelView, amount, glm::vec3(1.0f, 0.0f, 0.0f));
+    modelView = glm::rotate(modelView, rotpomak, glm::vec3(1.0f, 0.0f, 0.0f));
     modelView= glm::translate(modelView,glm::vec3(-x,-y, -z));
 }
 
-void NkHexCamera::rotateUp(float amount)
+void NkHexCamera::rotateUp()
 {
     //rotirati oko selektovanog ne oko kamere!!!!
     if(rot>=120) return;
@@ -108,8 +115,38 @@ void NkHexCamera::rotateUp(float amount)
     float y=ExtractCameraPos_NoScale(modelView)[1];
     float z=ExtractCameraPos_NoScale(modelView)[2];
     modelView= glm::translate(modelView,glm::vec3(x,y, z));
-    modelView = glm::rotate(modelView, amount, glm::vec3(-1.0f, 0.0f, 0.0f));
+    modelView = glm::rotate(modelView, rotpomak, glm::vec3(-1.0f, 0.0f, 0.0f));
     modelView= glm::translate(modelView,glm::vec3(-x,-y, -z));
+}
+
+void NkHexCamera::moveUp()
+{
+    translateZ(pomak);
+}
+
+void NkHexCamera::moveDown()
+{
+    translateZ(-pomak);
+}
+
+void NkHexCamera::moveLeft()
+{
+    translateX(pomak);
+}
+
+void NkHexCamera::moveRight()
+{
+    translateX(-pomak);
+}
+
+void NkHexCamera::zoomIn()
+{
+    translateY((pomak));
+}
+
+void NkHexCamera::zoomOut()
+{
+    translateY(-(pomak));
 }
 
 

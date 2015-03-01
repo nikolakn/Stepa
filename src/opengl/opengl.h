@@ -90,8 +90,8 @@ public:
     void moveUp();
     void moveDown();
 
-    void move1();
-    void move2();
+    void zoomIn();
+    void zoomOut();
     void setFpsMsg(string msg) {fpsMsg = msg;}
     void showFps(bool fps);
     void resize(int w, int h);

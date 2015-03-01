@@ -270,16 +270,16 @@ void NkSdl::handleKeys( SDL_Event event, int x __attribute__((unused)),
             GL->moveDown();
             break;
         case SDLK_KP_PLUS:
-            GL->move1();
+            GL->zoomIn();
             break;
         case SDLK_KP_MINUS:
-            GL->move2();
+            GL->zoomOut();
             break;
         case SDLK_PAGEUP:
-            GL->move1();
+            GL->zoomIn();
             break;
         case SDLK_PAGEDOWN:
-            GL->move2();
+            GL->zoomOut();
             break;
         case SDLK_1:
             GL->rotateUp();

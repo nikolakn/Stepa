@@ -65,9 +65,7 @@ bool  NkOpengl::initGL(int w, int h)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //set camera to init possition
-    kamera.translateY(8);
-    kamera.translateZ(-0.5*38);
-    kamera.translateX(-3.5);
+    kamera.setPogled();
     return true;
 }
 
@@ -129,48 +127,40 @@ void NkOpengl::leftClick(int x, int y){
 
 void NkOpengl::moveLeft()
 {
-    //kamera.rotate(0.05f);
-    kamera.translateX(0.5);
+    kamera.moveLeft();
 }
 
 void NkOpengl::moveRight()
 {
-    //kamera.rotate(-0.05f);
-    kamera.translateX(-0.5);
+    kamera.moveRight();
 }
 void NkOpengl::moveUp()
 {
-    //kamera.rotatex(0.05f);
-    kamera.translateZ(0.5);
+    kamera.moveUp();
 }
 
 void NkOpengl::moveDown()
 {
-    //kamera.rotatex(-0.05f);
-    kamera.translateZ(-0.5);
+    kamera.moveDown();
 }
 
-void NkOpengl::move1()
+void NkOpengl::zoomIn()
 {
-    //kamera.rotatex(-0.05f);
-    kamera.translateY(0.5);
+    kamera.zoomIn();
 }
 
-void NkOpengl::move2()
+void NkOpengl::zoomOut()
 {
-    //kamera.rotatex(-0.05f);
-    kamera.translateY(-0.5);
+    kamera.zoomOut();
 }
 void NkOpengl::rotateUp()
 {
-    //kamera.rotatex(-0.05f);
-    kamera.rotateUp(0.05);
+    kamera.rotateUp();
 }
 
 void NkOpengl::rotateDown()
 {
-    //kamera.rotatex(-0.05f);
-    kamera.rotateDown(0.05);
+    kamera.rotateDown();
 }
 void NkOpengl::showFps(bool fps){
     showFpsGl = fps;
