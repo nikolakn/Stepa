@@ -17,7 +17,3 @@ OpenGL 3.3 core profile
 build:
 qmake;
 make
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nikolakn/stepa/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
